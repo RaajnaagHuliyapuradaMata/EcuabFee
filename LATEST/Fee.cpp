@@ -2,6 +2,6 @@
 
 class_Fee Fee;
 
-void class_Fee::InitFunction(void){
+FUNC(void, FEE_CODE) class_Fee::InitFunction(void){
 }
 
