@@ -1,14 +1,15 @@
 #pragma once
 /*****************************************************/
-/* File   : Fee.h                                    */
+/* File   : Fee_EcuM.h                             */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
 /*****************************************************/
 /* #INCLUDES                                         */
 /*****************************************************/
-#include "Std_Types.h"
 #include "Compiler_Cfg_Fee.h"
+
+#include "EcuM_Client.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -21,23 +22,12 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class class_Fee{
+class class_Fee_EcuM : public class_EcuM_Client{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, FEE_CODE) SetMode                (void);
-      FUNC(void, FEE_CODE) Read                   (void);
-      FUNC(void, FEE_CODE) Write                  (void);
-      FUNC(void, FEE_CODE) Cancel                 (void);
-      FUNC(void, FEE_CODE) GetStatus              (void);
-      FUNC(void, FEE_CODE) GetJobResult           (void);
-      FUNC(void, FEE_CODE) InvalidateBlock        (void);
-      FUNC(void, FEE_CODE) GetVersionInfo         (void);
-      FUNC(void, FEE_CODE) EraseImmediateBlock    (void);
-      FUNC(void, FEE_CODE) CbJobEndNotification   (void);
-      FUNC(void, FEE_CODE) CbJobErrorNotification (void);
-      FUNC(void, FEE_CODE) MainFunction           (void);
+      FUNC(void, FEE_CODE) InitFunction(void);
 };
 
 /*****************************************************/
@@ -51,7 +41,7 @@ class class_Fee{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern class_Fee Fee;
+extern class_EcuM_Client *EcuM_Client_ptr_Fee;
 
 /*****************************************************/
 /* EOF                                               */

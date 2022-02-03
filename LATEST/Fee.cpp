@@ -8,6 +8,8 @@
 /*****************************************************/
 #include "Fee.h"
 
+#include "Fee_EcuM.h"
+
 /*****************************************************/
 /* #DEFINES                                          */
 /*****************************************************/
@@ -32,11 +34,13 @@
 /* OBJECTS                                           */
 /*****************************************************/
 class_Fee Fee;
+class_Fee_EcuM Fee_EcuM;
+class_EcuM_Client *EcuM_Client_ptr_Fee = &Fee_EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-FUNC(void, FEE_CODE) class_Fee::InitFunction(void){
+FUNC(void, FEE_CODE) class_Fee_EcuM::InitFunction(void){
 }
 
 FUNC(void, FEE_CODE) class_Fee::SetMode(void){
