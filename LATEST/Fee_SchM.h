@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : Fee_EcuM.h                               */
+/* File   : Fee_SchM.h                               */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -9,7 +9,7 @@
 /*****************************************************/
 #include "Compiler_Cfg_Fee.h"
 
-#include "EcuM_Client.h"
+#include "SchM_Client.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -22,13 +22,12 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class interface_Fee_EcuM : public interface_EcuM_Client{
+class interface_Fee_SchM : public interface_SchM_Client{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, FEE_CODE) InitFunction   (void);
-      FUNC(void, FEE_CODE) DeInitFunction (void);
+      FUNC(void, FEE_CODE) MainFunction(void);
 };
 
 /*****************************************************/
@@ -42,7 +41,7 @@ class interface_Fee_EcuM : public interface_EcuM_Client{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_Fee_EcuM *EcuM_Client_ptr_Fee;
+extern interface_Fee_SchM *SchM_Client_ptr_Fee;
 
 /*****************************************************/
 /* EOF                                               */

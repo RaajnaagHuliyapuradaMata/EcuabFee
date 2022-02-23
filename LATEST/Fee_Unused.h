@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : Fee.h                                    */
+/* File   : Fee_Unused.h                             */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -21,7 +21,7 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class class_Fee{
+class class_Fee_Unused{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
@@ -37,7 +37,6 @@ class class_Fee{
       FUNC(void, FEE_CODE) EraseImmediateBlock    (void);
       FUNC(void, FEE_CODE) CbJobEndNotification   (void);
       FUNC(void, FEE_CODE) CbJobErrorNotification (void);
-      FUNC(void, FEE_CODE) MainFunction           (void);
 };
 
 /*****************************************************/
@@ -51,7 +50,7 @@ class class_Fee{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern class_Fee Fee;
+//extern class_Fee Fee;
 
 /*****************************************************/
 /* EOF                                               */

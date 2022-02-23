@@ -6,9 +6,10 @@
 /*****************************************************/
 /* #INCLUDES                                         */
 /*****************************************************/
-#include "Fee.h"
-
+#include "module.h"
 #include "Fee_EcuM.h"
+#include "Fee_SchM.h"
+#include "Fee_Unused.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -21,6 +22,16 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
+class module_Fee:
+      public abstract_module
+   ,  public interface_Fee_EcuM
+   ,  public interface_Fee_SchM
+{
+   public:
+      FUNC(void, FEE_CODE) InitFunction   (void);
+      FUNC(void, FEE_CODE) DeInitFunction (void);
+      FUNC(void, FEE_CODE) MainFunction   (void);
+};
 
 /*****************************************************/
 /* CONSTS                                            */
@@ -33,50 +44,54 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-class_Fee Fee;
-class_Fee_EcuM Fee_EcuM;
-class_EcuM_Client *EcuM_Client_ptr_Fee = &Fee_EcuM;
+module_Fee Fee;
+
+interface_Fee_EcuM *EcuM_Client_ptr_Fee = &Fee;
+interface_Fee_SchM *SchM_Client_ptr_Fee = &Fee;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-FUNC(void, FEE_CODE) class_Fee_EcuM::InitFunction(void){
+FUNC(void, FEE_CODE) module_Fee::InitFunction(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::SetMode(void){
+FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::Read(void){
+FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::Write(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::SetMode(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::Cancel(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::Read(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::GetStatus(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::Write(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::GetJobResult(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::Cancel(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::InvalidateBlock(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::GetStatus(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::GetVersionInfo(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::GetJobResult(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::EraseImmediateBlock(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::InvalidateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::CbJobEndNotification(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::GetVersionInfo(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::CbJobErrorNotification(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::EraseImmediateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee::MainFunction(void){
+FUNC(void, FEE_CODE) class_Fee_Unused::CbJobEndNotification(void){
+}
+
+FUNC(void, FEE_CODE) class_Fee_Unused::CbJobErrorNotification(void){
 }
 
 /*****************************************************/
