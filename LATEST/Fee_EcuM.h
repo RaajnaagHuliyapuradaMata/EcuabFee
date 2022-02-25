@@ -27,8 +27,8 @@ class interface_Fee_EcuM : public interface_EcuM_Client{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, FEE_CODE) InitFunction   (void);
-      FUNC(void, FEE_CODE) DeInitFunction (void);
+      virtual FUNC(void, FEE_CODE) InitFunction   (void) = 0;
+      virtual FUNC(void, FEE_CODE) DeInitFunction (void) = 0;
 };
 
 /*****************************************************/
