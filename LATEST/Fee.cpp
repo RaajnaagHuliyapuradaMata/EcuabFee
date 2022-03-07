@@ -24,8 +24,6 @@
 /*****************************************************/
 class module_Fee:
       public abstract_module
-   ,  public interface_Fee_EcuM
-   ,  public interface_Fee_SchM
 {
    public:
       FUNC(void, FEE_CODE) InitFunction   (void);
@@ -44,10 +42,9 @@ class module_Fee:
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-module_Fee Fee;
-
-interface_Fee_EcuM *EcuM_Client_ptr_Fee = &Fee;
-interface_Fee_SchM *SchM_Client_ptr_Fee = &Fee;
+module_Fee     Fee;
+infEcuMClient* gptrinfEcuMClient_Fee = &Fee;
+infSchMClient* gptrinfSchMClient_Fee = &Fee;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
