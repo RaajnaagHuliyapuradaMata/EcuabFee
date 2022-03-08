@@ -32,7 +32,7 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_Fee_SchM *SchM_Client_ptr_Fee;
+extern infSchMClient *gptrinfSchMClient_Fee;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
