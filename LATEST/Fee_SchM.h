@@ -32,7 +32,7 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infSchMClient *gptrinfSchMClient_Fee;
+extern infSchMClient* gptrinfSchMClient_Fee;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
