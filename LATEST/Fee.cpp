@@ -7,8 +7,8 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "module.h"
-#include "Fee_EcuM.h"
-#include "Fee_SchM.h"
+#include "infFee_EcuM.h"
+#include "infFee_SchM.h"
 #include "Fee_Unused.h"
 
 /*****************************************************/
@@ -28,6 +28,7 @@ class module_Fee:
    public:
       FUNC(void, FEE_CODE) InitFunction   (void);
       FUNC(void, FEE_CODE) DeInitFunction (void);
+      FUNC(void, FEE_CODE) GetVersionInfo (void);
       FUNC(void, FEE_CODE) MainFunction   (void);
 };
 
@@ -44,6 +45,7 @@ class module_Fee:
 /*****************************************************/
 module_Fee     Fee;
 infEcuMClient* gptrinfEcuMClient_Fee = &Fee;
+infDcmClient*  gptrinfDcmClient_Fee  = &Fee;
 infSchMClient* gptrinfSchMClient_Fee = &Fee;
 
 /*****************************************************/
@@ -53,6 +55,9 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(void){
 }
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
+}
+
+FUNC(void, FEE_CODE) module_Fee::GetVersionInfo(void){
 }
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
