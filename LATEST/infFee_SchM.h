@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : Fee_EcuM.h                               */
+/* File   : infFee_SchM.h                            */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -32,7 +32,7 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infEcuMClient* gptrinfEcuMClient_Fee;
+extern infSchMClient* gptrinfSchMClient_Fee;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
