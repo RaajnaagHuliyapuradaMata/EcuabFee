@@ -6,9 +6,8 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "infFee_Version.h"
-
 #include "module.h"
+#include "infFee_Version.h"
 #include "infFee_EcuM.h"
 #include "infFee_Dcm.h"
 #include "infFee_SchM.h"
@@ -54,9 +53,11 @@ CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 FUNC(void, FEE_CODE) module_Fee::InitFunction(void){
+   Fee.IsInitDone = E_OK;
 }
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
+   Fee.IsInitDone = E_NOT_OK;
 }
 
 FUNC(void, FEE_CODE) module_Fee::GetVersionInfo(void){
