@@ -7,7 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.h"
-#include "infFee_Version.h"
+#include "Fee_Cfg.h"
 #include "infFee_EcuM.h"
 #include "infFee_Dcm.h"
 #include "infFee_SchM.h"
@@ -15,10 +15,19 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+#define FEE_AR_RELEASE_MAJOR_VERSION                                           4
+#define FEE_AR_RELEASE_MINOR_VERSION                                           3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
+#if(FEE_AR_RELEASE_MAJOR_VERSION != STD_AR_RELEASE_MAJOR_VERSION)
+   #error "Incompatible FEE_AR_RELEASE_MAJOR_VERSION!"
+#endif
+
+#if(FEE_AR_RELEASE_MINOR_VERSION != STD_AR_RELEASE_MINOR_VERSION)
+   #error "Incompatible FEE_AR_RELEASE_MINOR_VERSION!"
+#endif
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
@@ -61,6 +70,11 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 }
 
 FUNC(void, FEE_CODE) module_Fee::GetVersionInfo(void){
+#if(STD_ON == Fee_DevErrorDetect)
+//TBD: API parameter check
+   Det_ReportError(
+   );
+#endif
 }
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
