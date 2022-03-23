@@ -40,6 +40,16 @@ class module_Fee:
       FUNC(void, FEE_CODE) DeInitFunction (void);
       FUNC(void, FEE_CODE) GetVersionInfo (void);
       FUNC(void, FEE_CODE) MainFunction   (void);
+
+   private:
+      CONST(Std_TypeVersionInfo, FEE_CONST) VersionInfo = {
+            0x0000
+         ,  0xFFFF
+         ,  0x01
+         ,  '0'
+         ,  '1'
+         ,  '0'
+      };
 };
 
 /******************************************************************************/
