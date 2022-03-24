@@ -7,7 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.h"
-#include "Fee_Cfg.h"
+#include "CfgFee.h"
 #include "infFee_EcuM.h"
 #include "infFee_Dcm.h"
 #include "infFee_SchM.h"
