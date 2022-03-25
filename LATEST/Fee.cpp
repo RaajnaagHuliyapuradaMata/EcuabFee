@@ -6,11 +6,11 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "module.h"
-#include "CfgFee.h"
-#include "infFee_EcuM.h"
-#include "infFee_Dcm.h"
-#include "infFee_SchM.h"
+#include "module.hpp"
+#include "CfgFee.hpp"
+#include "infFee_EcuM.hpp"
+#include "infFee_Dcm.hpp"
+#include "infFee_SchM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -90,7 +90,7 @@ FUNC(void, FEE_CODE) module_Fee::GetVersionInfo(void){
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 }
 
-#include "Fee_Unused.h"
+#include "Fee_Unused.hpp"
 
 FUNC(void, FEE_CODE) class_Fee_Unused::SetMode(void){
 }
