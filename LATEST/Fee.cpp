@@ -7,7 +7,6 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.hpp"
-#include "CfgFee.hpp"
 #include "infFee_EcuM.hpp"
 #include "infFee_Dcm.hpp"
 #include "infFee_SchM.hpp"
@@ -36,37 +35,40 @@ class module_Fee:
       public abstract_module
 {
    public:
+      module_Fee(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
+      }
       FUNC(void, FEE_CODE) InitFunction   (void);
       FUNC(void, FEE_CODE) DeInitFunction (void);
-      FUNC(void, FEE_CODE) GetVersionInfo (void);
       FUNC(void, FEE_CODE) MainFunction   (void);
-
-   private:
-      CONST(Std_TypeVersionInfo, FEE_CONST) VersionInfo = {
-            0x0000
-         ,  0xFFFF
-         ,  0x01
-         ,  '0'
-         ,  '1'
-         ,  '0'
-      };
 };
+
+extern VAR(module_Fee, FEE_VAR) Fee;
 
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
+CONSTP2VAR(infEcuMClient, FEE_VAR, FEE_CONST) gptrinfEcuMClient_Fee = &Fee;
+CONSTP2VAR(infDcmClient,  FEE_VAR, FEE_CONST) gptrinfDcmClient_Fee  = &Fee;
+CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
 
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
+#include "CfgFee.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_Fee, FEE_VAR) Fee;
-CONSTP2VAR(infEcuMClient, FEE_VAR, FEE_CONST) gptrinfEcuMClient_Fee = &Fee;
-CONSTP2VAR(infDcmClient,  FEE_VAR, FEE_CONST) gptrinfDcmClient_Fee  = &Fee;
-CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
+VAR(module_Fee, FEE_VAR) Fee(
+   {
+         0x0000
+      ,  0xFFFF
+      ,  0x01
+      ,  '0'
+      ,  '1'
+      ,  '0'
+   }
+);
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -77,14 +79,6 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(void){
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
    Fee.IsInitDone = E_NOT_OK;
-}
-
-FUNC(void, FEE_CODE) module_Fee::GetVersionInfo(void){
-#if(STD_ON == Fee_DevErrorDetect)
-//TBD: API parameter check
-   Det_ReportError(
-   );
-#endif
 }
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
