@@ -37,10 +37,9 @@ class module_Fee:
    public:
       module_Fee(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
       }
-      FUNC(void, _CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, _CONFIG_DATA, _APPL_CONST) lptrCfgModule
+      FUNC(void, FEE_CODE) InitFunction(
+         CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
       );
-      FUNC(void, FEE_CODE) InitFunction   (void);
       FUNC(void, FEE_CODE) DeInitFunction (void);
       FUNC(void, FEE_CODE) MainFunction   (void);
 };
@@ -77,23 +76,39 @@ VAR(module_Fee, FEE_VAR) Fee(
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 FUNC(void, FEE_CODE) module_Fee::InitFunction(
-   CONSTP2CONST(CfgFee_Type, CFGFEE_CONFIG_DATA, CFGFEE_APPL_CONST) lptrCfgFee
+   CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
 ){
-   if(NULL_PTR == lptrCfgFee){
+   if(E_OK == IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
       );
 #endif
    }
    else{
-// check lptrCfgFee for memory faults
+      if(NULL_PTR == lptrCfgModule){
+#if(STD_ON == Fee_DevErrorDetect)
+         Det_ReportError(
+         );
+#endif
+      }
+      else{
+// check lptrCfgModule for memory faults
 // use PBcfg_Fee as back-up configuration
+      }
+      IsInitDone = E_OK;
    }
-   Fee.IsInitDone = E_OK;
 }
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
-   Fee.IsInitDone = E_NOT_OK;
+   if(E_OK != IsInitDone){
+#if(STD_ON == Fee_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+      IsInitDone = E_NOT_OK;
+   }
 }
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
