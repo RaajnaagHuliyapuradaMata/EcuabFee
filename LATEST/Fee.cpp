@@ -78,6 +78,7 @@ VAR(module_Fee, FEE_VAR) Fee(
 FUNC(void, FEE_CODE) module_Fee::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
 ){
+#if(STD_ON == Fee_InitCheck)
    if(E_OK == IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
@@ -85,6 +86,7 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
 #endif
    }
    else{
+#endif
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Fee_DevErrorDetect)
          Det_ReportError(
@@ -96,10 +98,13 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
 // use PBcfg_Fee as back-up configuration
       }
       IsInitDone = E_OK;
+#if(STD_ON == Fee_InitCheck)
    }
+#endif
 }
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
+#if(STD_ON == Fee_InitCheck)
    if(E_OK != IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
@@ -107,11 +112,26 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 #endif
    }
    else{
+#endif
       IsInitDone = E_NOT_OK;
+#if(STD_ON == Fee_InitCheck)
    }
+#endif
 }
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
+#if(STD_ON == Fee_InitCheck)
+   if(E_OK != IsInitDone){
+#if(STD_ON == Fee_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+#endif
+#if(STD_ON == Fee_InitCheck)
+   }
+#endif
 }
 
 class class_Fee_Unused{
