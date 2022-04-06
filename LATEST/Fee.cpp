@@ -14,18 +14,18 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define FEE_AR_RELEASE_MAJOR_VERSION                                           4
-#define FEE_AR_RELEASE_MINOR_VERSION                                           3
+#define FEE_AR_RELEASE_VERSION_MAJOR                                           4
+#define FEE_AR_RELEASE_VERSION_MINOR                                           3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(FEE_AR_RELEASE_MAJOR_VERSION != STD_AR_RELEASE_MAJOR_VERSION)
-   #error "Incompatible FEE_AR_RELEASE_MAJOR_VERSION!"
+#if(FEE_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
+   #error "Incompatible FEE_AR_RELEASE_VERSION_MAJOR!"
 #endif
 
-#if(FEE_AR_RELEASE_MINOR_VERSION != STD_AR_RELEASE_MINOR_VERSION)
-   #error "Incompatible FEE_AR_RELEASE_MINOR_VERSION!"
+#if(FEE_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
+   #error "Incompatible FEE_AR_RELEASE_VERSION_MINOR!"
 #endif
 
 /******************************************************************************/
@@ -63,8 +63,10 @@ CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
 /******************************************************************************/
 VAR(module_Fee, FEE_VAR) Fee(
    {
-         0x0000
-      ,  0xFFFF
+         FEE_AR_RELEASE_VERSION_MAJOR
+      ,  FEE_AR_RELEASE_VERSION_MINOR
+      ,  0x00
+      ,  0xFF
       ,  0x01
       ,  '0'
       ,  '1'
