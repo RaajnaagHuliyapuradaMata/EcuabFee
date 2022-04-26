@@ -31,8 +31,24 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+class class_Fee_Functionality{
+   public:
+      FUNC(void, FEE_CODE) SetMode                (void);
+      FUNC(void, FEE_CODE) Read                   (void);
+      FUNC(void, FEE_CODE) Write                  (void);
+      FUNC(void, FEE_CODE) Cancel                 (void);
+      FUNC(void, FEE_CODE) GetStatus              (void);
+      FUNC(void, FEE_CODE) GetJobResult           (void);
+      FUNC(void, FEE_CODE) InvalidateBlock        (void);
+      FUNC(void, FEE_CODE) GetVersionInfo         (void);
+      FUNC(void, FEE_CODE) EraseImmediateBlock    (void);
+      FUNC(void, FEE_CODE) CbJobEndNotification   (void);
+      FUNC(void, FEE_CODE) CbJobErrorNotification (void);
+};
+
 class module_Fee:
       public abstract_module
+   ,  public class_Fee_Functionality
 {
    public:
       module_Fee(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
@@ -84,6 +100,10 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
    if(E_OK == IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -92,6 +112,10 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Fee_DevErrorDetect)
          Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
          );
 #endif
       }
@@ -116,6 +140,10 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -132,6 +160,10 @@ FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Fee_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -142,49 +174,34 @@ FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 #endif
 }
 
-class class_Fee_Unused{
-   public:
-      FUNC(void, FEE_CODE) SetMode                (void);
-      FUNC(void, FEE_CODE) Read                   (void);
-      FUNC(void, FEE_CODE) Write                  (void);
-      FUNC(void, FEE_CODE) Cancel                 (void);
-      FUNC(void, FEE_CODE) GetStatus              (void);
-      FUNC(void, FEE_CODE) GetJobResult           (void);
-      FUNC(void, FEE_CODE) InvalidateBlock        (void);
-      FUNC(void, FEE_CODE) GetVersionInfo         (void);
-      FUNC(void, FEE_CODE) EraseImmediateBlock    (void);
-      FUNC(void, FEE_CODE) CbJobEndNotification   (void);
-      FUNC(void, FEE_CODE) CbJobErrorNotification (void);
-};
-
-FUNC(void, FEE_CODE) class_Fee_Unused::SetMode(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::SetMode(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::Read(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::Read(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::Write(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::Write(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::Cancel(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::Cancel(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::GetStatus(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::GetStatus(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::GetJobResult(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::GetJobResult(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::InvalidateBlock(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::InvalidateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::EraseImmediateBlock(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::EraseImmediateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::CbJobEndNotification(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::CbJobEndNotification(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Unused::CbJobErrorNotification(void){
+FUNC(void, FEE_CODE) class_Fee_Functionality::CbJobErrorNotification(void){
 }
 
 /******************************************************************************/
