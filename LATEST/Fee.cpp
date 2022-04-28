@@ -7,6 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "Fee_core.hpp"
 #include "infFee_EcuM.hpp"
 #include "infFee_Dcm.hpp"
 #include "infFee_SchM.hpp"
