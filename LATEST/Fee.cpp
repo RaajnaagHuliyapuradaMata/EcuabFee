@@ -7,10 +7,9 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "CfgFee.hpp"
 #include "Fee_core.hpp"
-#include "infFee_EcuM.hpp"
-#include "infFee_Dcm.hpp"
-#include "infFee_SchM.hpp"
+#include "infFee.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -44,6 +43,7 @@ class module_Fee:
       );
       FUNC(void, FEE_CODE) DeInitFunction (void);
       FUNC(void, FEE_CODE) MainFunction   (void);
+      FEE_CORE_FUNCTIONALITIES
 };
 
 extern VAR(module_Fee, FEE_VAR) Fee;
@@ -58,7 +58,6 @@ CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
-#include "CfgFee.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */
