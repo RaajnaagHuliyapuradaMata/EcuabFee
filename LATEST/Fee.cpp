@@ -159,34 +159,34 @@ FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 #endif
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::SetMode(void){
+FUNC(void, FEE_CODE) module_Fee::SetMode(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::Read(void){
+FUNC(void, FEE_CODE) module_Fee::Read(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::Write(void){
+FUNC(void, FEE_CODE) module_Fee::Write(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::Cancel(void){
+FUNC(void, FEE_CODE) module_Fee::Cancel(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::GetStatus(void){
+FUNC(void, FEE_CODE) module_Fee::GetStatus(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::GetJobResult(void){
+FUNC(void, FEE_CODE) module_Fee::GetJobResult(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::InvalidateBlock(void){
+FUNC(void, FEE_CODE) module_Fee::InvalidateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::EraseImmediateBlock(void){
+FUNC(void, FEE_CODE) module_Fee::EraseImmediateBlock(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::CbJobEndNotification(void){
+FUNC(void, FEE_CODE) module_Fee::CbJobEndNotification(void){
 }
 
-FUNC(void, FEE_CODE) class_Fee_Functionality::CbJobErrorNotification(void){
+FUNC(void, FEE_CODE) module_Fee::CbJobErrorNotification(void){
 }
 
 /******************************************************************************/
