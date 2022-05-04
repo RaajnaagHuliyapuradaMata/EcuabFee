@@ -113,7 +113,7 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  FEE_E_UNINIT
       );
 #endif
    }
@@ -133,7 +133,7 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  FEE_E_UNINIT
       );
 #endif
    }
@@ -152,7 +152,7 @@ FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  FEE_E_UNINIT
       );
 #endif
    }
