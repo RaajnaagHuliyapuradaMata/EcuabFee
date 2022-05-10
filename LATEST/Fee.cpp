@@ -89,7 +89,10 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Fee_InitCheck)
-   if(E_OK != IsInitDone){
+   if(
+         E_OK
+      != IsInitDone
+   ){
 #endif
       if(NULL_PTR != lptrCfgModule){
          if(STD_HIGH){
@@ -127,7 +130,10 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
 
 FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 #if(STD_ON == Fee_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
 #if(STD_ON == Fee_InitCheck)
       IsInitDone = E_NOT_OK;
@@ -147,7 +153,10 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 
 FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 #if(STD_ON == Fee_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
 #if(STD_ON == Fee_InitCheck)
    }
