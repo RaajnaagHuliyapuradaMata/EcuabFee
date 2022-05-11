@@ -9,7 +9,7 @@
 #include "Module.hpp"
 #include "CfgFee.hpp"
 #include "Fee_core.hpp"
-#include "infFee.hpp"
+#include "infFee_Exp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -32,6 +32,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_Fee:
+   INTERFACES_EXPORTED_FEE
       public abstract_module
    ,  public class_Fee_Functionality
 {
