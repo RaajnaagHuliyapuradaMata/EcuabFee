@@ -32,7 +32,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_Fee:
-   INTERFACES_EXPORTED_FEE
+      INTERFACES_EXPORTED_FEE
       public abstract_module
    ,  public class_Fee_Functionality
 {
