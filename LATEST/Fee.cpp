@@ -10,6 +10,7 @@
 #include "CfgFee.hpp"
 #include "Fee_core.hpp"
 #include "infFee_Exp.hpp"
+#include "infFee_Imp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
