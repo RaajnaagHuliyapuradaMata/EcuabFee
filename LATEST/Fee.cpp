@@ -74,7 +74,7 @@ CONSTP2VAR(infSchMClient, FEE_VAR, FEE_CONST) gptrinfSchMClient_Fee = &Fee;
 VAR(module_Fee, FEE_VAR) Fee(
    {
 #if(STD_ON == _ReSIM)
-// char strModuleName[6];
+   char strModuleName[6] = "FEE";
 #else
 #endif
          FEE_AR_RELEASE_VERSION_MAJOR
