@@ -130,7 +130,9 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
 #endif
 }
 
-FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
+FUNC(void, FEE_CODE) module_Fee::DeInitFunction(
+   void
+){
 #if(STD_ON == Fee_InitCheck)
    if(
          E_OK
@@ -153,7 +155,9 @@ FUNC(void, FEE_CODE) module_Fee::DeInitFunction(void){
 #endif
 }
 
-FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
+FUNC(void, FEE_CODE) module_Fee::MainFunction(
+   void
+){
 #if(STD_ON == Fee_InitCheck)
    if(
          E_OK
@@ -175,34 +179,54 @@ FUNC(void, FEE_CODE) module_Fee::MainFunction(void){
 #endif
 }
 
-FUNC(void, FEE_CODE) module_Fee::SetMode(void){
+FUNC(void, FEE_CODE) module_Fee::SetMode(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::Read(void){
+FUNC(void, FEE_CODE) module_Fee::Read(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::Write(void){
+FUNC(void, FEE_CODE) module_Fee::Write(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::Cancel(void){
+FUNC(void, FEE_CODE) module_Fee::Cancel(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::GetStatus(void){
+FUNC(void, FEE_CODE) module_Fee::GetStatus(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::GetJobResult(void){
+FUNC(void, FEE_CODE) module_Fee::GetJobResult(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::InvalidateBlock(void){
+FUNC(void, FEE_CODE) module_Fee::InvalidateBlock(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::EraseImmediateBlock(void){
+FUNC(void, FEE_CODE) module_Fee::EraseImmediateBlock(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::CbJobEndNotification(void){
+FUNC(void, FEE_CODE) module_Fee::CbJobEndNotification(
+   void
+){
 }
 
-FUNC(void, FEE_CODE) module_Fee::CbJobErrorNotification(void){
+FUNC(void, FEE_CODE) module_Fee::CbJobErrorNotification(
+   void
+){
 }
 
 /******************************************************************************/
