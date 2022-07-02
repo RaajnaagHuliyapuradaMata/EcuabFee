@@ -82,12 +82,7 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
    ){
 #endif
       if(NULL_PTR != lptrCfgModule){
-         if(STD_HIGH){
-            lptrCfg = lptrCfgModule;
-         }
-         else{
-            lptrCfg = &PBcfgFee;
-         }
+         lptrCfg = lptrCfgModule;
       }
       else{
 #if(STD_ON == Fee_DevErrorDetect)
