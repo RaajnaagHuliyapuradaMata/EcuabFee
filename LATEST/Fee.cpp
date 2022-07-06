@@ -7,9 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
-#include "CfgFee.hpp"
-#include "Fee_core.hpp"
-#include "infFee_Exp.hpp"
+#include "Fee.hpp"
 #include "infFee_Imp.hpp"
 
 /******************************************************************************/
@@ -32,26 +30,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class module_Fee:
-      INTERFACES_EXPORTED_FEE
-      public abstract_module
-   ,  public class_Fee_Functionality
-{
-   private:
-/******************************************************************************/
-/* OBJECTS                                                                    */
-/******************************************************************************/
-
-   public:
-      FUNC(void, FEE_CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
-      );
-      FUNC(void, FEE_CODE) DeInitFunction (void);
-      FUNC(void, FEE_CODE) MainFunction   (void);
-      FEE_CORE_FUNCTIONALITIES
-};
-
-extern VAR(module_Fee, FEE_VAR) Fee;
 
 /******************************************************************************/
 /* CONSTS                                                                     */
