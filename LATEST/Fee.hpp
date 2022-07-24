@@ -7,6 +7,7 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "ConstFee.hpp"
 #include "CfgFee.hpp"
 #include "Fee_core.hpp"
 #include "infFee_Exp.hpp"
@@ -31,13 +32,15 @@ class module_Fee:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
+      const ConstFee_Type* lptrConst = (ConstFee_Type*)NULL_PTR;
 
    public:
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
       FUNC(void, FEE_CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
+            CONSTP2CONST(ConstModule_TypeAbstract, FEE_CONST,       FEE_APPL_CONST) lptrConstModule
+         ,  CONSTP2CONST(CfgModule_TypeAbstract,   FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
       );
       FUNC(void, FEE_CODE) DeInitFunction (void);
       FUNC(void, FEE_CODE) MainFunction   (void);

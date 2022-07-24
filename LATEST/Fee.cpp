@@ -48,7 +48,8 @@ VAR(module_Fee, FEE_VAR) Fee;
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 FUNC(void, FEE_CODE) module_Fee::InitFunction(
-   CONSTP2CONST(CfgModule_TypeAbstract, FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
+      CONSTP2CONST(ConstModule_TypeAbstract, FEE_CONST,       FEE_APPL_CONST) lptrConstModule
+   ,  CONSTP2CONST(CfgModule_TypeAbstract,   FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Fee_InitCheck)
    if(
@@ -56,8 +57,12 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
       != IsInitDone
    ){
 #endif
-      if(NULL_PTR != lptrCfgModule){
-         lptrCfg = lptrCfgModule;
+      if(
+            (NULL_PTR != lptrConstModule)
+         && (NULL_PTR != lptrCfgModule)
+      ){
+         lptrConst = lptrConstModule;
+         lptrCfg   = lptrCfgModule;
       }
       else{
 #if(STD_ON == Fee_DevErrorDetect)
