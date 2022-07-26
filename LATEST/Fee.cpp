@@ -61,7 +61,7 @@ FUNC(void, FEE_CODE) module_Fee::InitFunction(
             (NULL_PTR != lptrConstModule)
          && (NULL_PTR != lptrCfgModule)
       ){
-         lptrConst = lptrConstModule;
+         lptrConst = (const ConstFee_Type*)lptrConstModule;
          lptrCfg   = lptrCfgModule;
       }
       else{
