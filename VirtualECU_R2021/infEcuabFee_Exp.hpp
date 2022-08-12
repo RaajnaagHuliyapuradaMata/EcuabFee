@@ -1,20 +1,18 @@
 #pragma once
 /******************************************************************************/
-/* File   : EcuabFee.hpp                                                           */
+/* File   : infEcuabFee_Exp.hpp                                                    */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "ConstEcuabFee.hpp"
-#include "CfgEcuabFee.hpp"
-#include "EcuabFee_core.hpp"
-#include "infEcuabFee_Exp.hpp"
+#include "infEcuabFee_ServiceDet.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+#define INTERFACES_EXPORTED_FEE
 
 /******************************************************************************/
 /* MACROS                                                                     */
@@ -23,29 +21,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class module_EcuabFee:
-      INTERFACES_EXMCALPORTED_ECUABFEE
-      public abstract_module
-   ,  public class_EcuabFee_Functionality
-{
-   private:
-/******************************************************************************/
-/* OBJECTS                                                                    */
-/******************************************************************************/
-      const ConstEcuabFee_Type* lptrConst = (ConstEcuabFee_Type*)NULL_PTR;
-
-   public:
-/******************************************************************************/
-/* FUNCTIONS                                                                  */
-/******************************************************************************/
-      FUNC(void, ECUABFEE_CODE) InitFunction(
-            CONSTP2CONST(ConstModule_TypeAbstract, ECUABFEE_CONST,       ECUABFEE_APPL_CONST) lptrConstModule
-         ,  CONSTP2CONST(CfgModule_TypeAbstract,   ECUABFEE_CONFIG_DATA, ECUABFEE_APPL_CONST) lptrCfgModule
-      );
-      FUNC(void, ECUABFEE_CODE) DeInitFunction (void);
-      FUNC(void, ECUABFEE_CODE) MainFunction   (void);
-      ECUABFEE_CORE_FUNCTIONALITIES
-};
 
 /******************************************************************************/
 /* CONSTS                                                                     */
@@ -58,7 +33,10 @@ class module_EcuabFee:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-extern VAR(module_EcuabFee, ECUABFEE_VAR) EcuabFee;
+
+/******************************************************************************/
+/* FUNCTIONS                                                                  */
+/******************************************************************************/
 
 /******************************************************************************/
 /* EOF                                                                        */

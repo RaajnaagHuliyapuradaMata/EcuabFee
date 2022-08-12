@@ -13,18 +13,18 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUABFEE_AR_RELEASE_VERSION_MAJOR                                           4
-#define ECUABFEE_AR_RELEASE_VERSION_MINOR                                           3
+#define FEE_AR_RELEASE_VERSION_MAJOR                                           4
+#define FEE_AR_RELEASE_VERSION_MINOR                                           3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(ECUABFEE_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
-   #error "Incompatible ECUABFEE_AR_RELEASE_VERSION_MAJOR!"
+#if(FEE_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
+   #error "Incompatible FEE_AR_RELEASE_VERSION_MAJOR!"
 #endif
 
-#if(ECUABFEE_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
-   #error "Incompatible ECUABFEE_AR_RELEASE_VERSION_MINOR!"
+#if(FEE_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
+   #error "Incompatible FEE_AR_RELEASE_VERSION_MINOR!"
 #endif
 
 /******************************************************************************/
@@ -42,14 +42,14 @@
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_EcuabFee, ECUABFEE_VAR) EcuabFee;
+VAR(module_EcuabFee, FEE_VAR) EcuabFee;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::InitFunction(
-      CONSTP2CONST(ConstModule_TypeAbstract, ECUABFEE_CONST,       ECUABFEE_APPL_CONST) lptrConstModule
-   ,  CONSTP2CONST(CfgModule_TypeAbstract,   ECUABFEE_CONFIG_DATA, ECUABFEE_APPL_CONST) lptrCfgModule
+FUNC(void, FEE_CODE) module_EcuabFee::InitFunction(
+      CONSTP2CONST(ConstModule_TypeAbstract, FEE_CONST,       FEE_APPL_CONST) lptrConstModule
+   ,  CONSTP2CONST(CfgModule_TypeAbstract,   FEE_CONFIG_DATA, FEE_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == EcuabFee_InitCheck)
    if(
@@ -83,14 +83,14 @@ FUNC(void, ECUABFEE_CODE) module_EcuabFee::InitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUABFEE_E_UNINIT
+         ,  FEE_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::DeInitFunction(
+FUNC(void, FEE_CODE) module_EcuabFee::DeInitFunction(
    void
 ){
 #if(STD_ON == EcuabFee_InitCheck)
@@ -108,14 +108,14 @@ FUNC(void, ECUABFEE_CODE) module_EcuabFee::DeInitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUABFEE_E_UNINIT
+         ,  FEE_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::MainFunction(
+FUNC(void, FEE_CODE) module_EcuabFee::MainFunction(
    void
 ){
 #if(STD_ON == EcuabFee_InitCheck)
@@ -132,59 +132,59 @@ FUNC(void, ECUABFEE_CODE) module_EcuabFee::MainFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUABFEE_E_UNINIT
+         ,  FEE_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::SetMode(
+FUNC(void, FEE_CODE) module_EcuabFee::SetMode(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::Read(
+FUNC(void, FEE_CODE) module_EcuabFee::Read(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::Write(
+FUNC(void, FEE_CODE) module_EcuabFee::Write(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::McalCancel(
+FUNC(void, FEE_CODE) module_EcuabFee::McalCancel(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::GetStatus(
+FUNC(void, FEE_CODE) module_EcuabFee::GetStatus(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::GetJobResult(
+FUNC(void, FEE_CODE) module_EcuabFee::GetJobResult(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::InvalidateBlock(
+FUNC(void, FEE_CODE) module_EcuabFee::InvalidateBlock(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::EraseImmediateBlock(
+FUNC(void, FEE_CODE) module_EcuabFee::EraseImmediateBlock(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::CbJobEndNotification(
+FUNC(void, FEE_CODE) module_EcuabFee::CbJobEndNotification(
    void
 ){
 }
 
-FUNC(void, ECUABFEE_CODE) module_EcuabFee::CbJobErrorNotification(
+FUNC(void, FEE_CODE) module_EcuabFee::CbJobErrorNotification(
    void
 ){
 }
