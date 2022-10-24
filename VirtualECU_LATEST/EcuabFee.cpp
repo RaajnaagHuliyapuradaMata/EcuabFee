@@ -1,5 +1,5 @@
 /******************************************************************************/
-/* File   : EcuabFee.cpp                                                           */
+/* File   : EcuabFee.cpp                                                      */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -13,8 +13,8 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUABFEE_AR_RELEASE_VERSION_MAJOR                                           4
-#define ECUABFEE_AR_RELEASE_VERSION_MINOR                                           3
+#define ECUABFEE_AR_RELEASE_VERSION_MAJOR                                      4
+#define ECUABFEE_AR_RELEASE_VERSION_MINOR                                      3
 
 /******************************************************************************/
 /* MACROS                                                                     */
