@@ -1,13 +1,13 @@
 #pragma once
 /******************************************************************************/
-/* File   : EcuabFee.hpp                                                           */
+/* File   : EcuabFee.hpp                                                      */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "ConstEcuabFee.hpp"
+#include "infEcuabFee_ServiceNvM_Types.hpp"
 #include "CfgEcuabFee.hpp"
 #include "EcuabFee_core.hpp"
 #include "infEcuabFee_Exp.hpp"
