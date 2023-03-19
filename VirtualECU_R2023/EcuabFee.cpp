@@ -9,7 +9,8 @@
 #include "Std_Types.hpp"
 
 #include "EcuabFee.hpp"
-#include "infEcuabFee_ServiceSwcEcuM.hpp"
+
+#include "infEcuabFeeServiceSwcEcuM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -38,9 +39,9 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-FUNC(void, ECUABFEE_CODE) EcuabFee_InitFunction   (void){}
-FUNC(void, ECUABFEE_CODE) EcuabFee_DeInitFunction (void){}
-FUNC(void, ECUABFEE_CODE) EcuabFee_MainFunction   (void){}
+FUNC(void, ECUABFEE_CODE) infEcuabFeeServiceSwcEcuM_InitFunction   (void){}
+FUNC(void, ECUABFEE_CODE) infEcuabFeeServiceSwcEcuM_DeInitFunction (void){}
+FUNC(void, ECUABFEE_CODE) infEcuabFeeServiceSwcSchM_MainFunction   (void){}
 
 /******************************************************************************/
 /* EOF                                                                        */
