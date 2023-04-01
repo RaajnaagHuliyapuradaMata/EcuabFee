@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************************/
-/* File   : infEcuabFeeServiceSwcEcuM.hpp                                     */
+/* File   : infEcuabFeeSwcServiceEcuM.hpp                                     */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -24,8 +24,8 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-extern FUNC(void, ECUABFEE_CODE) infEcuabFeeServiceSwcEcuM_InitFunction   (void);
-extern FUNC(void, ECUABFEE_CODE) infEcuabFeeServiceSwcEcuM_DeInitFunction (void);
+extern FUNC(void, ECUABFEE_CODE) infEcuabFeeSwcServiceEcuM_InitFunction   (void);
+extern FUNC(void, ECUABFEE_CODE) infEcuabFeeSwcServiceEcuM_DeInitFunction (void);
 
 /******************************************************************************/
 /* CONSTS                                                                     */
