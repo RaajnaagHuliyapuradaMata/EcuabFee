@@ -4,7 +4,7 @@
 #include "MemIf_Types.hpp"
 #include "Fee_30_SmallSector_Cfg.hpp"
 
-#define FEE_30_SMALLSECTOR_VENDOR_ID                    (30u)
+#define FEE_30_SMALLSECTOR_VENDOR_ID                    (1u)
 #define FEE_30_SMALLSECTOR_MODULE_ID                    (21u)
 #define FEE_30_SMALLSECTOR_INSTANCE_ID                  (0u)
 #define FEE_30_SMALLSECTOR_AR_RELEASE_MAJOR_VERSION     (4u)
