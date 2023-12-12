@@ -1,222 +1,222 @@
 #include "Std_Types.hpp"
 
-#define FEE_30_SMALLSECTOR_IMPLEMENTATION_SOURCE
+#define EcuabFee_IMPLEMENTATION_SOURCE
 
-#include "Fee_30_SmallSector_Layer1_Write.hpp"
-#include "Fee_30_SmallSector_Layer2_InstanceFinder.hpp"
-#include "Fee_30_SmallSector_Layer2_DatasetEraser.hpp"
-#include "Fee_30_SmallSector_Layer2_WriteInstance.hpp"
-#include "Fee_30_SmallSector_DatasetHandler.hpp"
-#include "Fee_30_SmallSector_InstanceHandler.hpp"
-#include "Fee_30_SmallSector_TaskManager.hpp"
+#include "EcuabFee_Layer1_Write.hpp"
+#include "EcuabFee_Layer2_InstanceFinder.hpp"
+#include "EcuabFee_Layer2_DatasetEraser.hpp"
+#include "EcuabFee_Layer2_WriteInstance.hpp"
+#include "EcuabFee_DatasetHandler.hpp"
+#include "EcuabFee_InstanceHandler.hpp"
+#include "EcuabFee_TaskManager.hpp"
 
-#define FEE_30_SMALLSECTOR_WRITE_LAYER FEE_30_SMALLSECTOR_LAYER_ONE_INDEX
+#define EcuabFee_WRITE_LAYER EcuabFee_LAYER_ONE_INDEX
 
-#ifndef FEE_30_SMALLSECTOR_LOCAL
-#define FEE_30_SMALLSECTOR_LOCAL static
+#ifndef EcuabFee_LOCAL
+#define EcuabFee_LOCAL static
 #endif
 
 typedef enum{
-  FEE_30_SMALLSECTOR_WR_STATE_UNINIT = 0
-   ,  FEE_30_SMALLSECTOR_WR_STATE_IDLE
-   ,  FEE_30_SMALLSECTOR_WR_STATE_WAIT_FOR_INSTANCEFINDER
-   ,  FEE_30_SMALLSECTOR_WR_STATE_ERASE_DATASET
-   ,  FEE_30_SMALLSECTOR_WR_STATE_WRITE_INSTANCE
-}Fee_30_SmallSector_Wr_StateType;
+  EcuabFee_WR_STATE_UNINIT = 0
+   ,  EcuabFee_WR_STATE_IDLE
+   ,  EcuabFee_WR_STATE_WAIT_FOR_INSTANCEFINDER
+   ,  EcuabFee_WR_STATE_ERASE_DATASET
+   ,  EcuabFee_WR_STATE_WRITE_INSTANCE
+}EcuabFee_Wr_StateType;
 
 typedef struct{
   MemIf_JobResultType JobResult;
   MemIf_StatusType Status;
-  Fee_30_SmallSector_Wr_StateType StateMachine;
+  EcuabFee_Wr_StateType StateMachine;
   boolean SuspendWrites;
-}Fee_30_SmallSector_Wr_ComponentParameterType;
+}EcuabFee_Wr_ComponentParameterType;
 
-#define FEE_30_SMALLSECTOR_START_SEC_VAR_FAST_INIT_UNSPECIFIED
+#define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL VAR(Fee_30_SmallSector_Wr_ComponentParameterType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Wr_ComponentParameter =
-   {MEMIF_JOB_FAILED, MEMIF_UNINIT, FEE_30_SMALLSECTOR_WR_STATE_UNINIT, FALSE};
+EcuabFee_LOCAL VAR(EcuabFee_Wr_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_Wr_ComponentParameter =
+   {MEMIF_JOB_FAILED, MEMIF_UNINIT, EcuabFee_WR_STATE_UNINIT, FALSE};
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
+#define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-#define FEE_30_SMALLSECTOR_START_SEC_VAR_NOINIT_UNSPECIFIED
+#define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL VAR(Fee_30_SmallSector_Ih_InstanceType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Wr_Instance;
+EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, EcuabFee_APPL_DATA) EcuabFee_Wr_Instance;
 
-FEE_30_SMALLSECTOR_LOCAL VAR(Fee_30_SmallSector_UserJobParameterType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Wr_UserJobParameter;
+EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_Wr_UserJobParameter;
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_VAR_NOINIT_UNSPECIFIED
+#define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-#define FEE_30_SMALLSECTOR_START_SEC_CODE
+#define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_InitiateDatasetErase(Fee_30_SmallSector_If_ResultType InstanceFinderResult);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_InitiateDatasetErase(EcuabFee_If_ResultType InstanceFinderResult);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_InitiateWriteInstance(void);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_InitiateWriteInstance(void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessInstanceFinderState(void);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessInstanceFinderState(void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessDatasetEraseState(void);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessDatasetEraseState(void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessStateMachine(void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_FinishJob(MemIf_JobResultType JobResult);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_InitiateDatasetErase(Fee_30_SmallSector_If_ResultType InstanceFinderResult)
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_InitiateDatasetErase(EcuabFee_If_ResultType InstanceFinderResult)
 {
 
-  if(Fee_30_SmallSector_De_StartJob(InstanceFinderResult) == E_OK)
+  if(EcuabFee_De_StartJob(InstanceFinderResult) == E_OK)
   {
-    Fee_30_SmallSector_Wr_ComponentParameter.StateMachine = FEE_30_SMALLSECTOR_WR_STATE_ERASE_DATASET;
+    EcuabFee_Wr_ComponentParameter.StateMachine = EcuabFee_WR_STATE_ERASE_DATASET;
   }
   else{
-    Fee_30_SmallSector_Wr_FinishJob(MEMIF_JOB_FAILED);
+    EcuabFee_Wr_FinishJob(MEMIF_JOB_FAILED);
   }
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_InitiateWriteInstance(void){
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_InitiateWriteInstance(void){
 
-  if(Fee_30_SmallSector_WrInst_StartJob(Fee_30_SmallSector_Wr_Instance, Fee_30_SmallSector_Wr_UserJobParameter) == E_OK)
+  if(EcuabFee_WrInst_StartJob(EcuabFee_Wr_Instance, EcuabFee_Wr_UserJobParameter) == E_OK)
   {
-    Fee_30_SmallSector_Wr_ComponentParameter.StateMachine = FEE_30_SMALLSECTOR_WR_STATE_WRITE_INSTANCE;
+    EcuabFee_Wr_ComponentParameter.StateMachine = EcuabFee_WR_STATE_WRITE_INSTANCE;
   }
   else{
-    Fee_30_SmallSector_Wr_FinishJob(MEMIF_JOB_FAILED);
+    EcuabFee_Wr_FinishJob(MEMIF_JOB_FAILED);
   }
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessInstanceFinderState(void){
-  Fee_30_SmallSector_If_ResultType InstanceFinderResult = Fee_30_SmallSector_If_GetJobResult();
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessInstanceFinderState(void){
+  EcuabFee_If_ResultType InstanceFinderResult = EcuabFee_If_GetJobResult();
 
   switch(InstanceFinderResult)
   {
   case INSTANCE_FINDER_OK:
   {
-   boolean IsLastInstance = Fee_30_SmallSector_Dh_IsLastInstance(&Fee_30_SmallSector_Wr_Instance) == TRUE;
+   boolean IsLastInstance = EcuabFee_Dh_IsLastInstance(&EcuabFee_Wr_Instance) == TRUE;
 
-   if((Fee_30_SmallSector_Dh_IsFirstInstanceAndBlank(&Fee_30_SmallSector_Wr_Instance) == TRUE) || (IsLastInstance == TRUE))
+   if((EcuabFee_Dh_IsFirstInstanceAndBlank(&EcuabFee_Wr_Instance) == TRUE) || (IsLastInstance == TRUE))
    {
 
-      Fee_30_SmallSector_Wr_InitiateDatasetErase(InstanceFinderResult);
+      EcuabFee_Wr_InitiateDatasetErase(InstanceFinderResult);
    }
    else{
 
-      Fee_30_SmallSector_Dh_PrepareNextInstance(&Fee_30_SmallSector_Wr_Instance);
+      EcuabFee_Dh_PrepareNextInstance(&EcuabFee_Wr_Instance);
 
-      Fee_30_SmallSector_Wr_InitiateWriteInstance();
+      EcuabFee_Wr_InitiateWriteInstance();
    }
    break;
   }
   case INSTANCE_FINDER_EP1_INCORRECT:
   case INSTANCE_FINDER_EP2_INCORRECT:
 
-    Fee_30_SmallSector_Wr_InitiateDatasetErase(InstanceFinderResult);
+    EcuabFee_Wr_InitiateDatasetErase(InstanceFinderResult);
    break;
 
   default:
-    Fee_30_SmallSector_Wr_FinishJob(Fee_30_SmallSector_If_MapResult(InstanceFinderResult));
+    EcuabFee_Wr_FinishJob(EcuabFee_If_MapResult(InstanceFinderResult));
    break;
   }
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessDatasetEraseState(void){
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessDatasetEraseState(void){
 
-  if(Fee_30_SmallSector_De_GetJobResult() == MEMIF_JOB_OK)
+  if(EcuabFee_De_GetJobResult() == MEMIF_JOB_OK)
   {
 
-    Fee_30_SmallSector_Ih_CreateInstance(&Fee_30_SmallSector_Wr_Instance, Fee_30_SmallSector_Dh_GetFirstInstanceAddress(), Fee_30_SmallSector_Dh_GetDataLength());
-    Fee_30_SmallSector_Wr_InitiateWriteInstance();
+    EcuabFee_Ih_CreateInstance(&EcuabFee_Wr_Instance, EcuabFee_Dh_GetFirstInstanceAddress(), EcuabFee_Dh_GetDataLength());
+    EcuabFee_Wr_InitiateWriteInstance();
   }
   else{
-    Fee_30_SmallSector_Wr_FinishJob(Fee_30_SmallSector_De_GetJobResult());
+    EcuabFee_Wr_FinishJob(EcuabFee_De_GetJobResult());
   }
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_ProcessStateMachine(void){
-  switch(Fee_30_SmallSector_Wr_ComponentParameter.StateMachine)
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_ProcessStateMachine(void){
+  switch(EcuabFee_Wr_ComponentParameter.StateMachine)
   {
 
-   case FEE_30_SMALLSECTOR_WR_STATE_IDLE:
+   case EcuabFee_WR_STATE_IDLE:
 
-      if(Fee_30_SmallSector_If_StartJob(&Fee_30_SmallSector_Wr_Instance) == E_OK)
+      if(EcuabFee_If_StartJob(&EcuabFee_Wr_Instance) == E_OK)
       {
-        Fee_30_SmallSector_Wr_ComponentParameter.StateMachine = FEE_30_SMALLSECTOR_WR_STATE_WAIT_FOR_INSTANCEFINDER;
+        EcuabFee_Wr_ComponentParameter.StateMachine = EcuabFee_WR_STATE_WAIT_FOR_INSTANCEFINDER;
       }
       else{
-        Fee_30_SmallSector_Wr_FinishJob(MEMIF_JOB_FAILED);
+        EcuabFee_Wr_FinishJob(MEMIF_JOB_FAILED);
       }
 
       break;
 
-   case FEE_30_SMALLSECTOR_WR_STATE_WAIT_FOR_INSTANCEFINDER:
+   case EcuabFee_WR_STATE_WAIT_FOR_INSTANCEFINDER:
 
-      Fee_30_SmallSector_Wr_ProcessInstanceFinderState();
-
-      break;
-
-   case FEE_30_SMALLSECTOR_WR_STATE_ERASE_DATASET:
-
-      Fee_30_SmallSector_Wr_ProcessDatasetEraseState();
+      EcuabFee_Wr_ProcessInstanceFinderState();
 
       break;
 
-   case FEE_30_SMALLSECTOR_WR_STATE_WRITE_INSTANCE:
+   case EcuabFee_WR_STATE_ERASE_DATASET:
 
-      Fee_30_SmallSector_Wr_FinishJob(Fee_30_SmallSector_WrInst_GetJobResult());
+      EcuabFee_Wr_ProcessDatasetEraseState();
+
+      break;
+
+   case EcuabFee_WR_STATE_WRITE_INSTANCE:
+
+      EcuabFee_Wr_FinishJob(EcuabFee_WrInst_GetJobResult());
 
       break;
 
     default:
-      Fee_30_SmallSector_Wr_FinishJob(MEMIF_JOB_FAILED);
+      EcuabFee_Wr_FinishJob(MEMIF_JOB_FAILED);
       break;
   }
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Wr_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC (void, EcuabFee_PRIVATE_CODE) EcuabFee_Wr_FinishJob(MemIf_JobResultType JobResult)
 {
 
-  Fee_30_SmallSector_Tm_RemoveTask(Fee_30_SmallSector_Wr_Execute, Fee_30_SmallSector_Wr_Cancel, FEE_30_SMALLSECTOR_WRITE_LAYER);
+  EcuabFee_Tm_RemoveTask(EcuabFee_Wr_Execute, EcuabFee_Wr_Cancel, EcuabFee_WRITE_LAYER);
 
-  Fee_30_SmallSector_Wr_ComponentParameter.JobResult = JobResult;
-  Fee_30_SmallSector_Wr_ComponentParameter.StateMachine = FEE_30_SMALLSECTOR_WR_STATE_IDLE;
-  Fee_30_SmallSector_Wr_ComponentParameter.Status = MEMIF_IDLE;
+  EcuabFee_Wr_ComponentParameter.JobResult = JobResult;
+  EcuabFee_Wr_ComponentParameter.StateMachine = EcuabFee_WR_STATE_IDLE;
+  EcuabFee_Wr_ComponentParameter.Status = MEMIF_IDLE;
 }
 
-FUNC(void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_Init(void){
-  Fee_30_SmallSector_Wr_ComponentParameter.Status = MEMIF_IDLE;
-  Fee_30_SmallSector_Wr_ComponentParameter.JobResult = MEMIF_JOB_OK;
+FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_Init(void){
+  EcuabFee_Wr_ComponentParameter.Status = MEMIF_IDLE;
+  EcuabFee_Wr_ComponentParameter.JobResult = MEMIF_JOB_OK;
 
-  Fee_30_SmallSector_Ih_InitInstance(&Fee_30_SmallSector_Wr_Instance);
+  EcuabFee_Ih_InitInstance(&EcuabFee_Wr_Instance);
 
-  Fee_30_SmallSector_Wr_ComponentParameter.StateMachine = FEE_30_SMALLSECTOR_WR_STATE_IDLE;
+  EcuabFee_Wr_ComponentParameter.StateMachine = EcuabFee_WR_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_GetStatus(void){
-  return Fee_30_SmallSector_Wr_ComponentParameter.Status;
+FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_GetStatus(void){
+  return EcuabFee_Wr_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_GetJobResult(void){
-  return Fee_30_SmallSector_Wr_ComponentParameter.JobResult;
+FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_GetJobResult(void){
+  return EcuabFee_Wr_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_StartJob(Fee_30_SmallSector_UserJobParameterType Fee_30_SmallSector_UserJobParameter)
+FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_StartJob(EcuabFee_UserJobParameterType EcuabFee_UserJobParameter)
 {
   Std_ReturnType retVal;
 
-  if(Fee_30_SmallSector_Wr_ComponentParameter.StateMachine == FEE_30_SMALLSECTOR_WR_STATE_IDLE)
+  if(EcuabFee_Wr_ComponentParameter.StateMachine == EcuabFee_WR_STATE_IDLE)
   {
 
-    retVal = Fee_30_SmallSector_Tm_AddTask(Fee_30_SmallSector_Wr_Execute, Fee_30_SmallSector_Wr_Cancel, FEE_30_SMALLSECTOR_WRITE_LAYER);
+    retVal = EcuabFee_Tm_AddTask(EcuabFee_Wr_Execute, EcuabFee_Wr_Cancel, EcuabFee_WRITE_LAYER);
 
    if(retVal == E_OK)
    {
-      Fee_30_SmallSector_Wr_ComponentParameter.Status = MEMIF_BUSY;
-      Fee_30_SmallSector_Wr_ComponentParameter.JobResult = MEMIF_JOB_PENDING;
+      EcuabFee_Wr_ComponentParameter.Status = MEMIF_BUSY;
+      EcuabFee_Wr_ComponentParameter.JobResult = MEMIF_JOB_PENDING;
 
-      Fee_30_SmallSector_Wr_UserJobParameter = Fee_30_SmallSector_UserJobParameter;
+      EcuabFee_Wr_UserJobParameter = EcuabFee_UserJobParameter;
    }
   }
   else{
@@ -225,29 +225,29 @@ FUNC(Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_Start
   return retVal;
 }
 
-FUNC(void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_Execute(void){
+FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_Execute(void){
 
-  if((Fee_30_SmallSector_Wr_ComponentParameter.Status == MEMIF_BUSY) &&
-      (Fee_30_SmallSector_Wr_ComponentParameter.SuspendWrites == FALSE))
+  if((EcuabFee_Wr_ComponentParameter.Status == MEMIF_BUSY) &&
+      (EcuabFee_Wr_ComponentParameter.SuspendWrites == FALSE))
   {
-      Fee_30_SmallSector_Wr_ProcessStateMachine();
+      EcuabFee_Wr_ProcessStateMachine();
   }
 }
 
-FUNC(void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_Cancel(void){
-  Fee_30_SmallSector_Wr_FinishJob(MEMIF_JOB_CANCELED);
+FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_Cancel(void){
+  EcuabFee_Wr_FinishJob(MEMIF_JOB_CANCELED);
 }
 
-FUNC(void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_SuspendWrites(void){
+FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_SuspendWrites(void){
 
-  Fee_30_SmallSector_Wr_ComponentParameter.SuspendWrites = TRUE;
+  EcuabFee_Wr_ComponentParameter.SuspendWrites = TRUE;
 }
 
-FUNC(void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Wr_ResumeWrites(void){
+FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Wr_ResumeWrites(void){
 
-  Fee_30_SmallSector_Wr_ComponentParameter.SuspendWrites = FALSE;
+  EcuabFee_Wr_ComponentParameter.SuspendWrites = FALSE;
 }
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_CODE
+#define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 

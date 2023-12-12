@@ -1,5 +1,5 @@
 ###############################################################################
-# File Name  : Fee_30_SmallSector_defs.mak                                    #
+# File Name  : EcuabFee_defs.mak                                    #
 # Description: Autosar makefile Template                                      #
 #              This makefile is a template to implement the common            #
 #              features of each project.                                      #

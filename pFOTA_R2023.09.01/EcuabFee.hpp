@@ -8,7 +8,7 @@ extern "C"
 #include "Std_Types.hpp"
 #include "Types_EcuabMemIf.hpp"
 #include "CfgEcuabFee.hpp"
-#define ECUABFEE_VENDOR_ID                    (30u)
+#define ECUABFEE_VENDOR_ID                    (1u)
 #define ECUABFEE_MODULE_ID                    (21u)
 #define ECUABFEE_INSTANCE_ID                  (0u)
 #define ECUABFEE_AR_RELEASE_MAJOR_VERSION     (4u)

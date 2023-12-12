@@ -1,5 +1,5 @@
 ###############################################################################
-# File Name  : Fee_30_SmallSector_rules.mak                                                   #
+# File Name  : EcuabFee_rules.mak                                                   #
 # Description: Autosar makefile Template                                      #
 #              This makefile is a template to implement the common            #
 #              features of each project.                                      #
@@ -36,16 +36,16 @@
 
 #e.g.: LIBRARIES_TO_BUILD      +=    $(LIB_OUPUT_PATH)\vendorx_canlib1.$(LIB_FILE_SUFFIX)
 LIBRARIES_TO_BUILD      += Fee_30_SmallSector
-Fee_30_SmallSector_FILES = Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\Fee_30_SmallSector_PartitionHandler.c Fee_30_SmallSector\Fee_30_SmallSector_BlockHandler.c \
-Fee_30_SmallSector\Fee_30_SmallSector_DatasetHandler.c Fee_30_SmallSector\Fee_30_SmallSector_InstanceHandler.c Fee_30_SmallSector\Fee_30_SmallSector_TaskManager.c Fee_30_SmallSector\Fee_30_SmallSector_FlsCoordinator.c \
-Fee_30_SmallSector\Fee_30_SmallSector_Layer1_Read.c Fee_30_SmallSector\Fee_30_SmallSector_Layer1_Write.c Fee_30_SmallSector\Fee_30_SmallSector_Layer2_WriteInstance.c  \
-Fee_30_SmallSector\Fee_30_SmallSector_Layer2_DatasetEraser.c Fee_30_SmallSector\Fee_30_SmallSector_Layer2_InstanceFinder.c Fee_30_SmallSector\Fee_30_SmallSector_Layer3_ReadManagementBytes.c
+EcuabFee_FILES = Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\EcuabFee_PartitionHandler.c Fee_30_SmallSector\EcuabFee_BlockHandler.c \
+Fee_30_SmallSector\EcuabFee_DatasetHandler.c Fee_30_SmallSector\EcuabFee_InstanceHandler.c Fee_30_SmallSector\EcuabFee_TaskManager.c Fee_30_SmallSector\EcuabFee_FlsCoordinator.c \
+Fee_30_SmallSector\EcuabFee_Layer1_Read.c Fee_30_SmallSector\EcuabFee_Layer1_Write.c Fee_30_SmallSector\EcuabFee_Layer2_WriteInstance.c  \
+Fee_30_SmallSector\EcuabFee_Layer2_DatasetEraser.c Fee_30_SmallSector\EcuabFee_Layer2_InstanceFinder.c Fee_30_SmallSector\EcuabFee_Layer3_ReadManagementBytes.c
 
 # e.g.: CC_FILES_TO_BUILD       += drv\can_drv.c
-CC_FILES_TO_BUILD       += Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\Fee_30_SmallSector_PartitionHandler.c Fee_30_SmallSector\Fee_30_SmallSector_BlockHandler.c \
-Fee_30_SmallSector\Fee_30_SmallSector_DatasetHandler.c Fee_30_SmallSector\Fee_30_SmallSector_InstanceHandler.c Fee_30_SmallSector\Fee_30_SmallSector_TaskManager.c Fee_30_SmallSector\Fee_30_SmallSector_FlsCoordinator.c \
-Fee_30_SmallSector\Fee_30_SmallSector_Layer1_Read.c Fee_30_SmallSector\Fee_30_SmallSector_Layer1_Write.c Fee_30_SmallSector\Fee_30_SmallSector_Layer2_WriteInstance.c \
-Fee_30_SmallSector\Fee_30_SmallSector_Layer2_DatasetEraser.c Fee_30_SmallSector\Fee_30_SmallSector_Layer2_InstanceFinder.c Fee_30_SmallSector\Fee_30_SmallSector_Layer3_ReadManagementBytes.c
+CC_FILES_TO_BUILD       += Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\EcuabFee_PartitionHandler.c Fee_30_SmallSector\EcuabFee_BlockHandler.c \
+Fee_30_SmallSector\EcuabFee_DatasetHandler.c Fee_30_SmallSector\EcuabFee_InstanceHandler.c Fee_30_SmallSector\EcuabFee_TaskManager.c Fee_30_SmallSector\EcuabFee_FlsCoordinator.c \
+Fee_30_SmallSector\EcuabFee_Layer1_Read.c Fee_30_SmallSector\EcuabFee_Layer1_Write.c Fee_30_SmallSector\EcuabFee_Layer2_WriteInstance.c \
+Fee_30_SmallSector\EcuabFee_Layer2_DatasetEraser.c Fee_30_SmallSector\EcuabFee_Layer2_InstanceFinder.c Fee_30_SmallSector\EcuabFee_Layer3_ReadManagementBytes.c
 CPP_FILES_TO_BUILD      +=
 ASM_FILES_TO_BUILD      +=
 
@@ -60,7 +60,7 @@ DIRECTORIES_TO_CREATE   +=
 #DEPEND_GCC_OPTS         += (not yet supported)
 
 # e.g.:  GENERATED_SOURCE_FILES += $(GENDATA_DIR)\drv_par.c
-GENERATED_SOURCE_FILES  +=  $(GENDATA_DIR)\Fee_30_SmallSector_Cfg.c
+GENERATED_SOURCE_FILES  +=  $(GENDATA_DIR)\EcuabFee_Cfg.c
 
 #e.g.: COMMON_SOURCE_FILES     += $(GENDATA_DIR)\v_par.c
 COMMON_SOURCE_FILES     +=

@@ -1,110 +1,110 @@
 #include "Std_Types.hpp"
 
-#define FEE_30_SMALLSECTOR_IMPLEMENTATION_SOURCE
+#define EcuabFee_IMPLEMENTATION_SOURCE
 
 #include "Fee_30_SmallSector.hpp"
-#include "Fee_30_SmallSector_FlsCoordinator.hpp"
-#include "Fee_30_SmallSector_PartitionHandler.hpp"
+#include "EcuabFee_FlsCoordinator.hpp"
+#include "EcuabFee_PartitionHandler.hpp"
 
-#ifndef FEE_30_SMALLSECTOR_LOCAL
-#define FEE_30_SMALLSECTOR_LOCAL static
+#ifndef EcuabFee_LOCAL
+#define EcuabFee_LOCAL static
 #endif
 
-#if(FEE_30_SMALLSECTOR_FLS_POLLING_MODE == STD_OFF)
-#define FEE_30_SMALLSECTOR_START_SEC_VAR_NOINIT_UNSPECIFIED
+#if(EcuabFee_FLS_POLLING_MODE == STD_OFF)
+#define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL VAR(MemIf_JobResultType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Fls_GlobalJobResult;
+EcuabFee_LOCAL VAR(MemIf_JobResultType, EcuabFee_APPL_DATA) EcuabFee_Fls_GlobalJobResult;
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_VAR_NOINIT_UNSPECIFIED
+#define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 #endif
 
-#define FEE_30_SMALLSECTOR_START_SEC_CODE
+#define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL FUNC(MemIf_JobResultType, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Fls_GetJobResultFromFlash(void);
+EcuabFee_LOCAL FUNC(MemIf_JobResultType, EcuabFee_PRIVATE_CODE) EcuabFee_Fls_GetJobResultFromFlash(void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC(void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Fls_SetResultPending(void);
+EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Fls_SetResultPending(void);
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_CODE
+#define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 
-#define FEE_30_SMALLSECTOR_START_SEC_CODE
+#define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL FUNC(MemIf_JobResultType, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Fls_GetJobResultFromFlash(void){
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->GetJobResult();
+EcuabFee_LOCAL FUNC(MemIf_JobResultType, EcuabFee_PRIVATE_CODE) EcuabFee_Fls_GetJobResultFromFlash(void){
+  return EcuabFee_Ph_GetFlsApiPtr()->GetJobResult();
 }
 
-FEE_30_SMALLSECTOR_LOCAL FUNC(void, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Fls_SetResultPending(void){
-#if(FEE_30_SMALLSECTOR_FLS_POLLING_MODE == STD_OFF)
-  Fee_30_SmallSector_Fls_GlobalJobResult = MEMIF_JOB_PENDING;
+EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Fls_SetResultPending(void){
+#if(EcuabFee_FLS_POLLING_MODE == STD_OFF)
+  EcuabFee_Fls_GlobalJobResult = MEMIF_JOB_PENDING;
 #endif
 }
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_CODE
+#define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 
-#define FEE_30_SMALLSECTOR_START_SEC_CODE
+#define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_Read(Fee_30_SmallSector_AddressType Address
-   ,   Fee_30_SmallSector_DataPtr BufferPtr, uint16 Length)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_Read(EcuabFee_AddressType Address
+   ,   EcuabFee_DataPtr BufferPtr, uint16 Length)
 {
-  Fee_30_SmallSector_Fls_SetResultPending();
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->Read(Address, BufferPtr, Length);
+  EcuabFee_Fls_SetResultPending();
+  return EcuabFee_Ph_GetFlsApiPtr()->Read(Address, BufferPtr, Length);
 }
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_Write(Fee_30_SmallSector_AddressType Address
-   ,   Fee_30_SmallSector_ConstDataPtr BufferPtr, uint16 Length)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_Write(EcuabFee_AddressType Address
+   ,   EcuabFee_ConstDataPtr BufferPtr, uint16 Length)
 {
-  Fee_30_SmallSector_Fls_SetResultPending();
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->Write(Address, BufferPtr, Length);
+  EcuabFee_Fls_SetResultPending();
+  return EcuabFee_Ph_GetFlsApiPtr()->Write(Address, BufferPtr, Length);
 }
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_Compare(Fee_30_SmallSector_AddressType Address
-   ,   Fee_30_SmallSector_ConstDataPtr BufferPtr, uint16 Length)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_Compare(EcuabFee_AddressType Address
+   ,   EcuabFee_ConstDataPtr BufferPtr, uint16 Length)
 {
-  Fee_30_SmallSector_Fls_SetResultPending();
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->Compare(Address, BufferPtr, Length);
+  EcuabFee_Fls_SetResultPending();
+  return EcuabFee_Ph_GetFlsApiPtr()->Compare(Address, BufferPtr, Length);
 }
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_Erase(Fee_30_SmallSector_AddressType Address, uint16 Length)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_Erase(EcuabFee_AddressType Address, uint16 Length)
 {
-  Fee_30_SmallSector_Fls_SetResultPending();
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->Erase(Address, Length);
+  EcuabFee_Fls_SetResultPending();
+  return EcuabFee_Ph_GetFlsApiPtr()->Erase(Address, Length);
 }
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_BlankCheck(Fee_30_SmallSector_AddressType Address, uint16 Length)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_BlankCheck(EcuabFee_AddressType Address, uint16 Length)
 {
-  Fee_30_SmallSector_Fls_SetResultPending();
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->BlankCheck(Address, Length);
+  EcuabFee_Fls_SetResultPending();
+  return EcuabFee_Ph_GetFlsApiPtr()->BlankCheck(Address, Length);
 }
 
-#if(FEE_30_SMALLSECTOR_FLS_POLLING_MODE == STD_OFF)
+#if(EcuabFee_FLS_POLLING_MODE == STD_OFF)
 
-FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_SetCurrentFlsJobResult(void){
-  Fee_30_SmallSector_Fls_GlobalJobResult = Fee_30_SmallSector_Fls_GetJobResultFromFlash();
+FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_SetCurrentFlsJobResult(void){
+  EcuabFee_Fls_GlobalJobResult = EcuabFee_Fls_GetJobResultFromFlash();
 }
 #endif
 
-FUNC (MemIf_JobResultType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_GetJobResult(void){
-#if(FEE_30_SMALLSECTOR_FLS_POLLING_MODE == STD_ON)
+FUNC (MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_GetJobResult(void){
+#if(EcuabFee_FLS_POLLING_MODE == STD_ON)
 
-  return Fee_30_SmallSector_Fls_GetJobResultFromFlash();
+  return EcuabFee_Fls_GetJobResultFromFlash();
 
 #else
 
-  return Fee_30_SmallSector_Fls_GlobalJobResult;
+  return EcuabFee_Fls_GlobalJobResult;
 
 #endif
 }
 
-FUNC (MemIf_StatusType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Fls_GetStatus(void){
-  return Fee_30_SmallSector_Ph_GetFlsApiPtr()->GetStatus();
+FUNC (MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_Fls_GetStatus(void){
+  return EcuabFee_Ph_GetFlsApiPtr()->GetStatus();
 }
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_CODE
+#define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 

@@ -1,66 +1,66 @@
 #include "Std_Types.hpp"
 
-#define FEE_30_SMALLSECTOR_IMPLEMENTATION_SOURCE
+#define EcuabFee_IMPLEMENTATION_SOURCE
 
-#include "Fee_30_SmallSector_TaskManager.hpp"
+#include "EcuabFee_TaskManager.hpp"
 
-#define FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS        (0x03u)
+#define EcuabFee_NUMBER_OF_LAYERS        (0x03u)
 
-#ifndef FEE_30_SMALLSECTOR_LOCAL
-#define FEE_30_SMALLSECTOR_LOCAL static
+#ifndef EcuabFee_LOCAL
+#define EcuabFee_LOCAL static
 #endif
 
-typedef P2FUNC(void, FEE_30_SMALLSECTOR_PRIVATE_CODE, Fee_30_SmallSector_Tm_FctPtrType)(void);
+typedef P2FUNC(void, EcuabFee_PRIVATE_CODE, EcuabFee_Tm_FctPtrType)(void);
 
-#define FEE_30_SMALLSECTOR_START_SEC_VAR_NOINIT_UNSPECIFIED
+#define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL VAR(Fee_30_SmallSector_Tm_FctPtrType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Tm_ExecuteServiceStack[FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS];
+EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, EcuabFee_APPL_DATA) EcuabFee_Tm_ExecuteServiceStack[EcuabFee_NUMBER_OF_LAYERS];
 
-FEE_30_SMALLSECTOR_LOCAL VAR(Fee_30_SmallSector_Tm_FctPtrType, FEE_30_SMALLSECTOR_APPL_DATA) Fee_30_SmallSector_Tm_CancelServiceStack[FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS];
+EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, EcuabFee_APPL_DATA) EcuabFee_Tm_CancelServiceStack[EcuabFee_NUMBER_OF_LAYERS];
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_VAR_NOINIT_UNSPECIFIED
+#define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-#define FEE_30_SMALLSECTOR_START_SEC_CODE
+#define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (Fee_30_SmallSector_Tm_FctPtrType, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Tm_GetActiveTask (void);
+EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, EcuabFee_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void);
 
-FEE_30_SMALLSECTOR_LOCAL FUNC (Fee_30_SmallSector_Tm_FctPtrType, FEE_30_SMALLSECTOR_PRIVATE_CODE) Fee_30_SmallSector_Tm_GetActiveTask (void){
+EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, EcuabFee_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void){
   sint8 LoopCounter;
-  Fee_30_SmallSector_Tm_FctPtrType returnValue = NULL_PTR;
+  EcuabFee_Tm_FctPtrType returnValue = NULL_PTR;
 
-  for(LoopCounter = FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS - 1; LoopCounter >= 0; LoopCounter--)
+  for(LoopCounter = EcuabFee_NUMBER_OF_LAYERS - 1; LoopCounter >= 0; LoopCounter--)
   {
 
-   if(Fee_30_SmallSector_Tm_ExecuteServiceStack[LoopCounter] != NULL_PTR)
+   if(EcuabFee_Tm_ExecuteServiceStack[LoopCounter] != NULL_PTR)
    {
-      returnValue = Fee_30_SmallSector_Tm_ExecuteServiceStack[LoopCounter];
+      returnValue = EcuabFee_Tm_ExecuteServiceStack[LoopCounter];
       break;
    }
   }
   return returnValue;
 }
 
-FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_Init(void){
+FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_Init(void){
   uint8 LoopCounter;
-  for(LoopCounter = 0; LoopCounter < FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS; LoopCounter++)
+  for(LoopCounter = 0; LoopCounter < EcuabFee_NUMBER_OF_LAYERS; LoopCounter++)
   {
-    Fee_30_SmallSector_Tm_ExecuteServiceStack[LoopCounter] = NULL_PTR;
-    Fee_30_SmallSector_Tm_CancelServiceStack[LoopCounter] = NULL_PTR;
+    EcuabFee_Tm_ExecuteServiceStack[LoopCounter] = NULL_PTR;
+    EcuabFee_Tm_CancelServiceStack[LoopCounter] = NULL_PTR;
   }
 }
 
-FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_AddTask (Fee_30_SmallSector_Tm_ExecuteServicePointerType ExecuteService
-   ,     Fee_30_SmallSector_Tm_CancelServicePointerType CancelService, uint8 Layer)
+FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_AddTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
+   ,     EcuabFee_Tm_CancelServicePointerType CancelService, uint8 Layer)
 {
   Std_ReturnType retVal;
 
-  if((Fee_30_SmallSector_Tm_ExecuteServiceStack[Layer] == NULL_PTR) && (Fee_30_SmallSector_Tm_CancelServiceStack[Layer] == NULL_PTR))
+  if((EcuabFee_Tm_ExecuteServiceStack[Layer] == NULL_PTR) && (EcuabFee_Tm_CancelServiceStack[Layer] == NULL_PTR))
   {
-    Fee_30_SmallSector_Tm_ExecuteServiceStack[Layer] = ExecuteService;
-    Fee_30_SmallSector_Tm_CancelServiceStack[Layer] = CancelService;
+    EcuabFee_Tm_ExecuteServiceStack[Layer] = ExecuteService;
+    EcuabFee_Tm_CancelServiceStack[Layer] = CancelService;
     retVal = E_OK;
   }
   else{
@@ -69,20 +69,20 @@ FUNC (Std_ReturnType, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_AddT
   return retVal;
 }
 
-FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_RemoveTask (Fee_30_SmallSector_Tm_ExecuteServicePointerType ExecuteService
-   ,     Fee_30_SmallSector_Tm_CancelServicePointerType CancelService, uint8 Layer)
+FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_RemoveTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
+   ,     EcuabFee_Tm_CancelServicePointerType CancelService, uint8 Layer)
 {
 
-  if((Fee_30_SmallSector_Tm_ExecuteServiceStack[Layer] == ExecuteService) && (Fee_30_SmallSector_Tm_CancelServiceStack[Layer] == CancelService))
+  if((EcuabFee_Tm_ExecuteServiceStack[Layer] == ExecuteService) && (EcuabFee_Tm_CancelServiceStack[Layer] == CancelService))
   {
-    Fee_30_SmallSector_Tm_ExecuteServiceStack[Layer] = NULL_PTR;
-    Fee_30_SmallSector_Tm_CancelServiceStack[Layer] = NULL_PTR;
+    EcuabFee_Tm_ExecuteServiceStack[Layer] = NULL_PTR;
+    EcuabFee_Tm_CancelServiceStack[Layer] = NULL_PTR;
   }
 }
 
-FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_ExecuteTask (void){
+FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_ExecuteTask (void){
 
-  Fee_30_SmallSector_Tm_FctPtrType currentExecuteService = Fee_30_SmallSector_Tm_GetActiveTask();
+  EcuabFee_Tm_FctPtrType currentExecuteService = EcuabFee_Tm_GetActiveTask();
 
   if(currentExecuteService != NULL_PTR)
   {
@@ -90,18 +90,18 @@ FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_ExecuteTask (v
   }
 }
 
-FUNC (void, FEE_30_SMALLSECTOR_PUBLIC_CODE) Fee_30_SmallSector_Tm_CancelTasks (void){
+FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_CancelTasks (void){
   sint8 LoopCounter;
 
-  for(LoopCounter = (FEE_30_SMALLSECTOR_NUMBER_OF_LAYERS - 1); LoopCounter >= 0; LoopCounter--)
+  for(LoopCounter = (EcuabFee_NUMBER_OF_LAYERS - 1); LoopCounter >= 0; LoopCounter--)
   {
-   if(Fee_30_SmallSector_Tm_CancelServiceStack[LoopCounter] != NULL_PTR)
+   if(EcuabFee_Tm_CancelServiceStack[LoopCounter] != NULL_PTR)
    {
-      Fee_30_SmallSector_Tm_CancelServiceStack[LoopCounter]();
+      EcuabFee_Tm_CancelServiceStack[LoopCounter]();
    }
   }
 }
 
-#define FEE_30_SMALLSECTOR_STOP_SEC_CODE
+#define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 
