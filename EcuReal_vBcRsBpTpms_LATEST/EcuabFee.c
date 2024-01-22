@@ -2,7 +2,7 @@
 
 #define EcuabFee_IMPLEMENTATION_SOURCE
 
-#include "Fee_30_SmallSector.hpp"
+#include "EcuabFee.hpp"
 #include "EcuabFee_Cbk.hpp"
 #include "EcuabFee_TaskManager.hpp"
 #include "EcuabFee_FlsCoordinator.hpp"
@@ -21,17 +21,17 @@
      || (EcuabFee_SW_MINOR_VERSION != (0u)) \
      || (EcuabFee_AR_RELEASE_MAJOR_VERSION != (4u)) \
      || (EcuabFee_AR_RELEASE_MINOR_VERSION != (0u)))
-# error "Version numbers of Fee_30_SmallSector.c and Fee_30_SmallSector.h are inconsistent!"
+# error "Version numbers of EcuabFee.c and EcuabFee.h are inconsistent!"
 #endif
 
 #if(   (EcuabFee_CFG_MAJOR_VERSION != (2u)) \
      || (EcuabFee_CFG_MINOR_VERSION != (0u)))
-# error "Version numbers of Fee_30_SmallSector.c and EcuabFee_Cfg.h are inconsistent!"
+# error "Version numbers of EcuabFee.c and EcuabFee_Cfg.h are inconsistent!"
 #endif
 
 #if(   (EcuabFee_CBK_MAJOR_VERSION != (2u)) \
      || (EcuabFee_CBK_MINOR_VERSION != (0u)))
-# error "Version numbers of Fee_30_SmallSector.c and EcuabFee_Cbk.h are inconsistent!"
+# error "Version numbers of EcuabFee.c and EcuabFee_Cbk.h are inconsistent!"
 #endif
 
 #define EcuabFee_RESERVED_BLOCK_NUMBER_1             (0x0000u)
@@ -65,9 +65,9 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_ComponentParameterType, EcuabFee_FAST_DATA) EcuabFee_ComponentParameter = {MEMIF_JOB_FAILED, MEMIF_UNINIT};
+EcuabFee_LOCAL VAR(EcuabFee_ComponentParameterType, ECUABFEE_FAST_DATA) EcuabFee_ComponentParameter = {MEMIF_JOB_FAILED, MEMIF_UNINIT};
 
-EcuabFee_LOCAL VAR(EFeeStateType, EcuabFee_APPL_DATA) EcuabFee_StateMachine = EcuabFee_STATE_UNINIT;
+EcuabFee_LOCAL VAR(EFeeStateType, ECUABFEE_APPL_DATA) EcuabFee_StateMachine = EcuabFee_STATE_UNINIT;
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -75,9 +75,9 @@ EcuabFee_LOCAL VAR(EFeeStateType, EcuabFee_APPL_DATA) EcuabFee_StateMachine = Ec
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_UserJobParameter;
+EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, ECUABFEE_APPL_DATA) EcuabFee_UserJobParameter;
 
-EcuabFee_LOCAL VAR(EcuabFee_InternalFlagsType, EcuabFee_APPL_DATA) EcuabFee_InternalFlags;
+EcuabFee_LOCAL VAR(EcuabFee_InternalFlagsType, ECUABFEE_APPL_DATA) EcuabFee_InternalFlags;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -85,67 +85,67 @@ EcuabFee_LOCAL VAR(EcuabFee_InternalFlagsType, EcuabFee_APPL_DATA) EcuabFee_Inte
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagJobRequested(boolean value);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagJobRequested(boolean value);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagCancelRequested(boolean value);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagCancelRequested(boolean value);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagMainFunctionBusy(boolean value);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagMainFunctionBusy(boolean value);
 
-EcuabFee_LOCAL FUNC(MemIf_StatusType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLayer1Status(void);
+EcuabFee_LOCAL FUNC(MemIf_StatusType, ECUABFEE_PRIVATE_CODE) EcuabFee_GetLayer1Status(void);
 
-EcuabFee_LOCAL FUNC(MemIf_JobResultType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLayer1JobResult(void);
+EcuabFee_LOCAL FUNC(MemIf_JobResultType, ECUABFEE_PRIVATE_CODE) EcuabFee_GetLayer1JobResult(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartLayer1Job(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_StartLayer1Job(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetUserParameter(uint16 BlockNumber
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetUserParameter(uint16 BlockNumber
    ,     uint16 BlockOffset
    ,     EcuabFee_DataPtr DataBufferPtr
    ,     uint16 Length
    ,     EcuabFee_JobType JobType);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetJobParameter(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetJobParameter(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartJob(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_StartJob(void);
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_CheckIdle(void);
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_CheckIdle(void);
 
 #if(EcuabFee_DEV_ERROR_DETECT == STD_ON)
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkInit(void);
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkInit(void);
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockNumberOk(uint16 BlockNumber, uint8 ApiID);
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockNumberOk(uint16 BlockNumber, uint8 ApiID);
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkDataPointerOk(
-        P2CONST(void, AUTOMATIC, EcuabFee_APPL_DATA) DataBufferPtr);
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkDataPointerOk(
+        P2CONST(void, AUTOMATIC, ECUABFEE_APPL_DATA) DataBufferPtr);
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockOffsetOk(uint16 BlockNumber, uint16 BlockOffset);
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockOffsetOk(uint16 BlockNumber, uint16 BlockOffset);
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockLengthOk(uint16 BlockNumber
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockLengthOk(uint16 BlockNumber
    ,     uint16 Length, uint16 BlockOffset);
 #endif
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_InitDataHandler(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_InitDataHandler(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_FinishJob(MemIf_JobResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagJobRequested(boolean value)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagJobRequested(boolean value)
 {
   EcuabFee_InternalFlags.JobRequested = value;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagCancelRequested(boolean value)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagCancelRequested(boolean value)
 {
   EcuabFee_InternalFlags.CancelRequested = value;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetFlagMainFunctionBusy(boolean value)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetFlagMainFunctionBusy(boolean value)
 {
   EcuabFee_InternalFlags.MainFunctionBusy = value;
 }
 
-EcuabFee_LOCAL FUNC(MemIf_StatusType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLayer1Status(void){
+EcuabFee_LOCAL FUNC(MemIf_StatusType, ECUABFEE_PRIVATE_CODE) EcuabFee_GetLayer1Status(void){
 
   MemIf_StatusType retVal;
 
@@ -161,7 +161,7 @@ EcuabFee_LOCAL FUNC(MemIf_StatusType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLayer1S
   return retVal;
 }
 
-EcuabFee_LOCAL FUNC(MemIf_JobResultType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLayer1JobResult(void){
+EcuabFee_LOCAL FUNC(MemIf_JobResultType, ECUABFEE_PRIVATE_CODE) EcuabFee_GetLayer1JobResult(void){
 
   MemIf_JobResultType retVal;
 
@@ -177,7 +177,7 @@ EcuabFee_LOCAL FUNC(MemIf_JobResultType, EcuabFee_PRIVATE_CODE) EcuabFee_GetLaye
   return retVal;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartLayer1Job(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_StartLayer1Job(void){
 
   switch(EcuabFee_UserJobParameter.JobType)
   {
@@ -190,7 +190,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartLayer1Job(void){
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetUserParameter(uint16 BlockNumber
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetUserParameter(uint16 BlockNumber
    ,     uint16 BlockOffset
    ,     EcuabFee_DataPtr DataBufferPtr
    ,     uint16 Length
@@ -203,7 +203,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetUserParameter(uint1
   EcuabFee_UserJobParameter.JobType = JobType;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetJobParameter(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_SetJobParameter(void){
   EcuabFee_ComponentParameter.Status = MEMIF_BUSY;
   EcuabFee_ComponentParameter.JobResult = MEMIF_JOB_PENDING;
 
@@ -211,7 +211,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_SetJobParameter(void){
   EcuabFee_SetFlagMainFunctionBusy(TRUE);
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartJob(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_StartJob(void){
 
   EcuabFee_Tm_Init();
 
@@ -222,17 +222,17 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_StartJob(void){
   EcuabFee_StateMachine = EcuabFee_STATE_BUSY;
 }
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_CheckIdle(void){
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_CheckIdle(void){
   return (Std_ReturnType) ((EcuabFee_ComponentParameter.Status == MEMIF_IDLE) ? E_OK : E_NOT_OK);
 }
 
 #if(EcuabFee_DEV_ERROR_DETECT == STD_ON)
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkInit(void){
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkInit(void){
   return (Std_ReturnType) ((EcuabFee_ComponentParameter.Status == MEMIF_UNINIT) ? E_NOT_OK : E_OK);
 }
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockNumberOk(uint16 BlockNumber, uint8 ApiID)
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockNumberOk(uint16 BlockNumber, uint8 ApiID)
 {
   Std_ReturnType retVal;
 
@@ -262,18 +262,18 @@ EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetCh
   return retVal;
 }
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkDataPointerOk(
-        P2CONST(void, AUTOMATIC, EcuabFee_APPL_DATA) DataBufferPtr)
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkDataPointerOk(
+        P2CONST(void, AUTOMATIC, ECUABFEE_APPL_DATA) DataBufferPtr)
 {
   return (Std_ReturnType) ((DataBufferPtr == NULL_PTR) ? E_NOT_OK : E_OK);
 }
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockOffsetOk(uint16 BlockNumber, uint16 BlockOffset)
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockOffsetOk(uint16 BlockNumber, uint16 BlockOffset)
 {
   return (Std_ReturnType) ((BlockOffset >= EcuabFee_Bh_GetDataLength(BlockNumber)) ? E_NOT_OK : E_OK);
 }
 
-EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetChkBlockLengthOk(uint16 BlockNumber
+EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_DetChkBlockLengthOk(uint16 BlockNumber
    ,     uint16 Length, uint16 BlockOffset)
 {
   Std_ReturnType retVal;
@@ -295,14 +295,14 @@ EcuabFee_LOCAL_INLINE FUNC(Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_DetCh
 }
 #endif
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_InitDataHandler(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_InitDataHandler(void){
   EcuabFee_Ph_Init(EcuabFee_UserJobParameter.BlockNumber);
   EcuabFee_Bh_Init(EcuabFee_UserJobParameter.BlockNumber, EcuabFee_Ph_GetPartitionStartAddress());
   EcuabFee_Dh_Init(EcuabFee_UserJobParameter.BlockNumber, EcuabFee_Bh_GetDataLength(EcuabFee_UserJobParameter.BlockNumber)
    ,  EcuabFee_Bh_GetNrOfInstances(EcuabFee_UserJobParameter.BlockNumber), EcuabFee_Bh_GetBlockStartAddress(), EcuabFee_Ph_GetPartitionAddressAlignment());
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_ProcessStateMachine(void){
   switch(EcuabFee_StateMachine)
   {
 
@@ -351,7 +351,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_ProcessStateMachine(vo
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_FinishJob(MemIf_JobResultType JobResult)
 {
 
   EcuabFee_SetFlagMainFunctionBusy(FALSE);
@@ -371,7 +371,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_FinishJob(MemIf_JobRes
 #endif
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Init(void){
   EcuabFee_ComponentParameter.JobResult = MEMIF_JOB_OK;
   EcuabFee_ComponentParameter.Status = MEMIF_IDLE;
 
@@ -391,7 +391,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Init(void){
   EcuabFee_RdMgmt_Init();
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Read(uint16 BlockNumber, uint16 BlockOffset
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Read(uint16 BlockNumber, uint16 BlockOffset
    ,   EcuabFee_VarDataPtrType DataBufferPtr,uint16 Length)
 {
 
@@ -456,7 +456,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Read(uint16 BlockNumber, uin
   return retVal;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Write(uint16 BlockNumber, EcuabFee_VarDataPtrType DataBufferPtr)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Write(uint16 BlockNumber, EcuabFee_VarDataPtrType DataBufferPtr)
 {
 
   Std_ReturnType retVal = E_NOT_OK;
@@ -508,7 +508,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Write(uint16 BlockNumber, Ec
   return retVal;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_InvalidateBlock(uint16 BlockNumber)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_InvalidateBlock(uint16 BlockNumber)
 {
 
   Std_ReturnType retVal = E_NOT_OK;
@@ -554,7 +554,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_InvalidateBlock(uint16 Block
   return retVal;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_EraseImmediateBlock(uint16 BlockNumber)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_EraseImmediateBlock(uint16 BlockNumber)
 {
 
   Std_ReturnType retVal = E_NOT_OK;
@@ -600,7 +600,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_EraseImmediateBlock(uint16 B
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Cancel(void){
 
   uint8 errorId = EcuabFee_E_NO_ERROR;
 
@@ -637,11 +637,11 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Cancel(void){
 #endif
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_GetStatus(void){
   return EcuabFee_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_GetJobResult(void){
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_GetJobResult(void){
 
   MemIf_JobResultType retVal;
   uint8 errorId = EcuabFee_E_NO_ERROR;
@@ -676,7 +676,7 @@ FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_GetJobResult(void){
 
 #if(EcuabFee_VERSION_INFO_API == STD_ON)
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, EcuabFee_APPL_DATA) VersionInfoPtr)
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, ECUABFEE_APPL_DATA) VersionInfoPtr)
 {
 
   uint8 errorId = EcuabFee_E_NO_ERROR;
@@ -713,35 +713,35 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_GetVersionInfo(P2VAR(Std_VersionInfoTy
 
 #endif
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_SetMode(MemIf_ModeType Mode)
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_SetMode(MemIf_ModeType Mode)
 {
 
   FEE_DUMMY_STATEMENT(Mode);
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_SuspendWrites (void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_SuspendWrites (void){
 
   EcuabFee_Wr_SuspendWrites();
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_ResumeWrites (void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_ResumeWrites (void){
 
   EcuabFee_Wr_ResumeWrites();
 }
 
 #if(EcuabFee_FLS_POLLING_MODE == STD_OFF)
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_JobEndNotification(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_JobEndNotification(void){
   EcuabFee_Fls_SetCurrentFlsJobResult();
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_JobErrorNotification(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_JobErrorNotification(void){
   EcuabFee_Fls_SetCurrentFlsJobResult();
 }
 
 #endif
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_MainFunction (void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_MainFunction (void){
 
   uint8 errorId = EcuabFee_E_NO_ERROR;
 
@@ -772,7 +772,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_MainFunction (void){
 #endif
 }
 
-FUNC (uint32, EcuabFee_PUBLIC_CODE) EcuabFee_AlignValue(uint32 Value, uint16 Alignment)
+FUNC (uint32, ECUABFEE_PUBLIC_CODE) EcuabFee_AlignValue(uint32 Value, uint16 Alignment)
 {
   uint32 retVal;
 

@@ -11,7 +11,7 @@
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR (uint16, EcuabFee_APPL_DATA) EcuabFee_Ph_PartitionIndex;
+EcuabFee_LOCAL VAR (uint16, ECUABFEE_APPL_DATA) EcuabFee_Ph_PartitionIndex;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -19,11 +19,11 @@ EcuabFee_LOCAL VAR (uint16, EcuabFee_APPL_DATA) EcuabFee_Ph_PartitionIndex;
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC (Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_Ph_FindBlockNumberInList(uint16 PartitionIndex, uint16 BlockNumber);
+EcuabFee_LOCAL FUNC (Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_Ph_FindBlockNumberInList(uint16 PartitionIndex, uint16 BlockNumber);
 
-EcuabFee_LOCAL FUNC (uint16, EcuabFee_PRIVATE_CODE) EcuabFee_Ph_CleanBlockNumber(uint16 BlockNumber);
+EcuabFee_LOCAL FUNC (uint16, ECUABFEE_PRIVATE_CODE) EcuabFee_Ph_CleanBlockNumber(uint16 BlockNumber);
 
-EcuabFee_LOCAL FUNC (Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_Ph_FindBlockNumberInList(uint16 PartitionIndex, uint16 BlockNumber)
+EcuabFee_LOCAL FUNC (Std_ReturnType, ECUABFEE_PRIVATE_CODE) EcuabFee_Ph_FindBlockNumberInList(uint16 PartitionIndex, uint16 BlockNumber)
 {
   uint16 i;
   Std_ReturnType retVal = E_NOT_OK;
@@ -41,12 +41,12 @@ EcuabFee_LOCAL FUNC (Std_ReturnType, EcuabFee_PRIVATE_CODE) EcuabFee_Ph_FindBloc
   return retVal;
 }
 
-EcuabFee_LOCAL FUNC (uint16, EcuabFee_PRIVATE_CODE) EcuabFee_Ph_CleanBlockNumber(uint16 BlockNumber)
+EcuabFee_LOCAL FUNC (uint16, ECUABFEE_PRIVATE_CODE) EcuabFee_Ph_CleanBlockNumber(uint16 BlockNumber)
 {
   return BlockNumber & (uint16) (0xFFFFU - ((1u << EcuabFee_DatasetSelectionBits) - 1u));
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_Init(uint16 BlockNumber)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_Init(uint16 BlockNumber)
 {
   uint16 LoopCounter;
 
@@ -61,31 +61,31 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_Init(uint16 BlockNumber)
   }
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetPartitionStartAddress(void){
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetPartitionStartAddress(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].PartitionStartAddress;
 }
 
-FUNC (uint16, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetPartitionWriteAlignment(void){
+FUNC (uint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetPartitionWriteAlignment(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].PartitionWriteAlignment;
 }
 
-FUNC (uint16, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetPartitionAddressAlignment(void){
+FUNC (uint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetPartitionAddressAlignment(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].PartitionAddressAlignment;
 }
 
-FUNC (uint16, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetPartitionReadAlignment(void){
+FUNC (uint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetPartitionReadAlignment(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].PartitionReadAlignment;
 }
 
-FUNC (EcuabFee_FlsApiPtrType, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetFlsApiPtr(void){
+FUNC (EcuabFee_FlsApiPtrType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetFlsApiPtr(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].FlsApiPtr;
 }
 
-FUNC (uint8, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetFlsEraseValue(void){
+FUNC (uint8, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetFlsEraseValue(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].FlsEraseValue;
 }
 
-FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Ph_GetBlankCheckApi(void){
+FUNC (boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Ph_GetBlankCheckApi(void){
   return EcuabFee_PartitionConfigList[EcuabFee_Ph_PartitionIndex].BlankCheckApiEnabled;
 }
 

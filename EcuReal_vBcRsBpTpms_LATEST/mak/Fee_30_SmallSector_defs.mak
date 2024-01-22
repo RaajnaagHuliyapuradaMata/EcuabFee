@@ -51,7 +51,7 @@
 # if for example additional includes are necessary, these vars can be defined and used in the REGISTRY-Part.
 # e.g.: $(CAN_CORE_PATH) = $(SSC_ROOT)\Can  could be used for CPP_INCLUDE_PATH    +=  $(CAN_CORE_PATH)\CPP_FILES\...
 
-FEE_30_SMALL_SECTOR_CORE_PATH       =   $(SSC_ROOT)\Fee_30_SmallSector
+FEE_30_SMALL_SECTOR_CORE_PATH       =   $(SSC_ROOT)\EcuabFee
 
 # e.g.: CAN_OUTPUT_PATH = $(GENDATA_DIR)
 

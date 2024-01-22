@@ -33,9 +33,9 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL P2VAR(EcuabFee_Ih_InstanceType, AUTOMATIC, EcuabFee_APPL_DATA) EcuabFee_If_Instance;
+EcuabFee_LOCAL P2VAR(EcuabFee_Ih_InstanceType, AUTOMATIC, ECUABFEE_APPL_DATA) EcuabFee_If_Instance;
 
-EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, EcuabFee_APPL_DATA) EcuabFee_If_InstancePrev;
+EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, ECUABFEE_APPL_DATA) EcuabFee_If_InstancePrev;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -43,7 +43,7 @@ EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, EcuabFee_APPL_DATA) EcuabFee_If_Ins
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_If_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_If_ComponentParameter =
+EcuabFee_LOCAL VAR(EcuabFee_If_ComponentParameterType, ECUABFEE_APPL_DATA) EcuabFee_If_ComponentParameter =
   { INSTANCE_FINDER_FAILED, MEMIF_UNINIT, EcuabFee_IF_STATE_UNINIT };
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
@@ -52,24 +52,24 @@ EcuabFee_LOCAL VAR(EcuabFee_If_ComponentParameterType, EcuabFee_APPL_DATA) Ecuab
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_If_IsSearchFinished(EcuabFee_Ih_InstanceVarPointerType Instance
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_If_IsSearchFinished(EcuabFee_Ih_InstanceVarPointerType Instance
    ,     EcuabFee_Ih_InstanceVarPointerType PreviousInstance);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_FinishJob(EcuabFee_If_ResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_FinishJob(EcuabFee_If_ResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessIdleState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessIdleState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessCheckErasePattern1(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessCheckErasePattern1(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessBlankCheckErasePattern2(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessBlankCheckErasePattern2(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessReadErasePattern2(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessReadErasePattern2(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessExamineInstanceState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessExamineInstanceState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_If_IsSearchFinished(EcuabFee_Ih_InstanceVarPointerType Instance
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_If_IsSearchFinished(EcuabFee_Ih_InstanceVarPointerType Instance
    ,     EcuabFee_Ih_InstanceVarPointerType PreviousInstance)
 {
 
@@ -93,7 +93,7 @@ EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_If_IsSearchFinished
   return retVal;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_FinishJob(EcuabFee_If_ResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_FinishJob(EcuabFee_If_ResultType JobResult)
 {
 
   EcuabFee_Tm_RemoveTask(EcuabFee_If_Execute, EcuabFee_If_Cancel, EcuabFee_INSTANCE_FINDER_LAYER);
@@ -103,7 +103,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_FinishJob(EcuabFee_
   EcuabFee_If_ComponentParameter.StateMachine = EcuabFee_IF_STATE_IDLE;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessIdleState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessIdleState(void){
 
   if(EcuabFee_Dh_CheckErasePattern() == E_OK)
   {
@@ -114,7 +114,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessIdleState(vo
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessCheckErasePattern1(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessCheckErasePattern1(void){
 
   if((EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK) && (EcuabFee_Dh_IsErasePatternBlank() == TRUE) )
   {
@@ -155,7 +155,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessCheckErasePa
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessBlankCheckErasePattern2(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessBlankCheckErasePattern2(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_BLOCK_INCONSISTENT)
   {
@@ -181,7 +181,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessBlankCheckEr
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessReadErasePattern2(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessReadErasePattern2(void){
   if((EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK) && (EcuabFee_Dh_IsErasePatternValid() == TRUE))
   {
 
@@ -209,7 +209,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessReadErasePat
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessExamineInstanceState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessExamineInstanceState(void){
 
   EcuabFee_Ih_DetermineInstanceStatus(EcuabFee_If_Instance);
 
@@ -240,7 +240,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessExamineInsta
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_If_ProcessStateMachine(void){
   switch(EcuabFee_If_ComponentParameter.StateMachine)
   {
 
@@ -287,7 +287,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_If_ProcessStateMachine
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_If_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_If_Init(void){
   EcuabFee_If_ComponentParameter.Status = MEMIF_IDLE;
   EcuabFee_If_ComponentParameter.JobResult = INSTANCE_FINDER_OK;
 
@@ -296,15 +296,15 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_If_Init(void){
   EcuabFee_If_ComponentParameter.StateMachine = EcuabFee_IF_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_If_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_If_GetStatus(void){
   return EcuabFee_If_ComponentParameter.Status;
 }
 
-FUNC(EcuabFee_If_ResultType, EcuabFee_PUBLIC_CODE) EcuabFee_If_GetJobResult(void){
+FUNC(EcuabFee_If_ResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_If_GetJobResult(void){
   return EcuabFee_If_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_If_StartJob(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_If_StartJob(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
   Std_ReturnType retVal;
 
@@ -327,7 +327,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_If_StartJob(EcuabFee_Ih_Inst
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_If_Execute(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_If_Execute(void){
 
   if(EcuabFee_If_ComponentParameter.Status == MEMIF_BUSY)
   {
@@ -335,11 +335,11 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_If_Execute(void){
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_If_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_If_Cancel(void){
   EcuabFee_If_FinishJob(INSTANCE_FINDER_CANCELED);
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_If_MapResult(EcuabFee_If_ResultType JobResult)
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_If_MapResult(EcuabFee_If_ResultType JobResult)
 {
   MemIf_JobResultType retVal;
 

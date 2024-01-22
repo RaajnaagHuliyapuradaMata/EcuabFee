@@ -35,17 +35,17 @@
 #
 
 #e.g.: LIBRARIES_TO_BUILD      +=    $(LIB_OUPUT_PATH)\vendorx_canlib1.$(LIB_FILE_SUFFIX)
-LIBRARIES_TO_BUILD      += Fee_30_SmallSector
-EcuabFee_FILES = Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\EcuabFee_PartitionHandler.c Fee_30_SmallSector\EcuabFee_BlockHandler.c \
-Fee_30_SmallSector\EcuabFee_DatasetHandler.c Fee_30_SmallSector\EcuabFee_InstanceHandler.c Fee_30_SmallSector\EcuabFee_TaskManager.c Fee_30_SmallSector\EcuabFee_FlsCoordinator.c \
-Fee_30_SmallSector\EcuabFee_Layer1_Read.c Fee_30_SmallSector\EcuabFee_Layer1_Write.c Fee_30_SmallSector\EcuabFee_Layer2_WriteInstance.c  \
-Fee_30_SmallSector\EcuabFee_Layer2_DatasetEraser.c Fee_30_SmallSector\EcuabFee_Layer2_InstanceFinder.c Fee_30_SmallSector\EcuabFee_Layer3_ReadManagementBytes.c
+LIBRARIES_TO_BUILD      += EcuabFee
+EcuabFee_FILES = EcuabFee\EcuabFee.c EcuabFee\EcuabFee_PartitionHandler.c EcuabFee\EcuabFee_BlockHandler.c \
+EcuabFee\EcuabFee_DatasetHandler.c EcuabFee\EcuabFee_InstanceHandler.c EcuabFee\EcuabFee_TaskManager.c EcuabFee\EcuabFee_FlsCoordinator.c \
+EcuabFee\EcuabFee_Layer1_Read.c EcuabFee\EcuabFee_Layer1_Write.c EcuabFee\EcuabFee_Layer2_WriteInstance.c  \
+EcuabFee\EcuabFee_Layer2_DatasetEraser.c EcuabFee\EcuabFee_Layer2_InstanceFinder.c EcuabFee\EcuabFee_Layer3_ReadManagementBytes.c
 
 # e.g.: CC_FILES_TO_BUILD       += drv\can_drv.c
-CC_FILES_TO_BUILD       += Fee_30_SmallSector\Fee_30_SmallSector.c Fee_30_SmallSector\EcuabFee_PartitionHandler.c Fee_30_SmallSector\EcuabFee_BlockHandler.c \
-Fee_30_SmallSector\EcuabFee_DatasetHandler.c Fee_30_SmallSector\EcuabFee_InstanceHandler.c Fee_30_SmallSector\EcuabFee_TaskManager.c Fee_30_SmallSector\EcuabFee_FlsCoordinator.c \
-Fee_30_SmallSector\EcuabFee_Layer1_Read.c Fee_30_SmallSector\EcuabFee_Layer1_Write.c Fee_30_SmallSector\EcuabFee_Layer2_WriteInstance.c \
-Fee_30_SmallSector\EcuabFee_Layer2_DatasetEraser.c Fee_30_SmallSector\EcuabFee_Layer2_InstanceFinder.c Fee_30_SmallSector\EcuabFee_Layer3_ReadManagementBytes.c
+CC_FILES_TO_BUILD       += EcuabFee\EcuabFee.c EcuabFee\EcuabFee_PartitionHandler.c EcuabFee\EcuabFee_BlockHandler.c \
+EcuabFee\EcuabFee_DatasetHandler.c EcuabFee\EcuabFee_InstanceHandler.c EcuabFee\EcuabFee_TaskManager.c EcuabFee\EcuabFee_FlsCoordinator.c \
+EcuabFee\EcuabFee_Layer1_Read.c EcuabFee\EcuabFee_Layer1_Write.c EcuabFee\EcuabFee_Layer2_WriteInstance.c \
+EcuabFee\EcuabFee_Layer2_DatasetEraser.c EcuabFee\EcuabFee_Layer2_InstanceFinder.c EcuabFee\EcuabFee_Layer3_ReadManagementBytes.c
 CPP_FILES_TO_BUILD      +=
 ASM_FILES_TO_BUILD      +=
 

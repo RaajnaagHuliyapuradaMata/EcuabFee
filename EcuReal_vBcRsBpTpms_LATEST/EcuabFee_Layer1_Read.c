@@ -31,7 +31,7 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_Rd_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_Rd_ComponentParameter =
+EcuabFee_LOCAL VAR(EcuabFee_Rd_ComponentParameterType, ECUABFEE_APPL_DATA) EcuabFee_Rd_ComponentParameter =
    {MEMIF_JOB_FAILED, MEMIF_UNINIT, EcuabFee_RD_STATE_UNINIT};
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
@@ -40,9 +40,9 @@ EcuabFee_LOCAL VAR(EcuabFee_Rd_ComponentParameterType, EcuabFee_APPL_DATA) Ecuab
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, EcuabFee_APPL_DATA) EcuabFee_Rd_Instance;
+EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, ECUABFEE_APPL_DATA) EcuabFee_Rd_Instance;
 
-EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_Rd_UserJobParameter;
+EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, ECUABFEE_APPL_DATA) EcuabFee_Rd_UserJobParameter;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -50,13 +50,13 @@ EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_R
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_FinishJob(MemIf_JobResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Rd_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessInstanceFinderState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Rd_ProcessInstanceFinderState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_FinishJob(MemIf_JobResultType JobResult)
 {
 
   EcuabFee_Tm_RemoveTask(EcuabFee_Rd_Execute, EcuabFee_Rd_Cancel, EcuabFee_READ_LAYER);
@@ -66,7 +66,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_FinishJob(MemIf_JobR
   EcuabFee_Rd_ComponentParameter.StateMachine = EcuabFee_RD_STATE_IDLE;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Rd_ProcessStateMachine(void){
   switch(EcuabFee_Rd_ComponentParameter.StateMachine)
   {
 
@@ -97,7 +97,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessStateMachine
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessInstanceFinderState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Rd_ProcessInstanceFinderState(void){
 
   if(EcuabFee_If_MapResult(EcuabFee_If_GetJobResult()) == MEMIF_JOB_OK)
   {
@@ -127,7 +127,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Rd_ProcessInstanceFind
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_Init(void){
   EcuabFee_Rd_ComponentParameter.Status = MEMIF_IDLE;
   EcuabFee_Rd_ComponentParameter.JobResult = MEMIF_JOB_OK;
 
@@ -136,15 +136,15 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_Init(void){
   EcuabFee_Rd_ComponentParameter.StateMachine = EcuabFee_RD_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_GetStatus(void){
   return EcuabFee_Rd_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_GetJobResult(void){
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_GetJobResult(void){
   return EcuabFee_Rd_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_StartJob(EcuabFee_UserJobParameterType EcuabFee_UserJobParameter)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_StartJob(EcuabFee_UserJobParameterType EcuabFee_UserJobParameter)
 {
   Std_ReturnType retVal;
 
@@ -168,7 +168,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_StartJob(EcuabFee_UserJob
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_Execute(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_Execute(void){
 
   if(EcuabFee_Rd_ComponentParameter.Status == MEMIF_BUSY)
   {
@@ -176,7 +176,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_Execute(void){
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Rd_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Rd_Cancel(void){
   EcuabFee_Rd_FinishJob(MEMIF_JOB_CANCELED);
 }
 

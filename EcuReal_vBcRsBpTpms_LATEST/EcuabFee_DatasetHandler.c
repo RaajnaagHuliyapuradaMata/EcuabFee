@@ -24,9 +24,9 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_Dh_DatasetType, EcuabFee_APPL_DATA) EcuabFee_Dh_DatasetInfo;
+EcuabFee_LOCAL VAR(EcuabFee_Dh_DatasetType, ECUABFEE_APPL_DATA) EcuabFee_Dh_DatasetInfo;
 
-EcuabFee_LOCAL VAR(uint8, EcuabFee_APPL_DATA) EcuabFee_Dh_TempBuffer[EcuabFee_MAX_WRITE_ALIGNMENT];
+EcuabFee_LOCAL VAR(uint8, ECUABFEE_APPL_DATA) EcuabFee_Dh_TempBuffer[EcuabFee_MAX_WRITE_ALIGNMENT];
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -34,35 +34,35 @@ EcuabFee_LOCAL VAR(uint8, EcuabFee_APPL_DATA) EcuabFee_Dh_TempBuffer[EcuabFee_MA
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC (uint8, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetDatasetIndex(uint16 BlockNumber);
+EcuabFee_LOCAL FUNC (uint8, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetDatasetIndex(uint16 BlockNumber);
 
-EcuabFee_LOCAL FUNC (uint8, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_AddressType InstanceStartAddress);
+EcuabFee_LOCAL FUNC (uint8, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_AddressType InstanceStartAddress);
 
-EcuabFee_LOCAL FUNC (EcuabFee_AddressType, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetAddressFromInstanceIndex(uint8 IndexOfActiveInstance);
+EcuabFee_LOCAL FUNC (EcuabFee_AddressType, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetAddressFromInstanceIndex(uint8 IndexOfActiveInstance);
 
-EcuabFee_LOCAL FUNC (uint16, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetAlignedSizeOfInstance(void);
+EcuabFee_LOCAL FUNC (uint16, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetAlignedSizeOfInstance(void);
 
-EcuabFee_LOCAL FUNC (uint8, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetDatasetIndex(uint16 BlockNumber)
+EcuabFee_LOCAL FUNC (uint8, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetDatasetIndex(uint16 BlockNumber)
 {
   return (uint8) (BlockNumber & ((1u << EcuabFee_DatasetSelectionBits) - 1u));
 }
 
-EcuabFee_LOCAL FUNC (uint8, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_AddressType InstanceStartAddress)
+EcuabFee_LOCAL FUNC (uint8, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_AddressType InstanceStartAddress)
 {
   return (uint8) ((InstanceStartAddress - EcuabFee_Dh_DatasetInfo.DatasetStartAddress - EcuabFee_Ph_GetPartitionWriteAlignment()) / EcuabFee_Dh_GetAlignedSizeOfInstance());
 }
 
-EcuabFee_LOCAL FUNC (EcuabFee_AddressType, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetAddressFromInstanceIndex(uint8 IndexOfActiveInstance)
+EcuabFee_LOCAL FUNC (EcuabFee_AddressType, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetAddressFromInstanceIndex(uint8 IndexOfActiveInstance)
 {
 
   return EcuabFee_Dh_DatasetInfo.DatasetStartAddress + (EcuabFee_AddressType)(EcuabFee_Ph_GetPartitionWriteAlignment() + (IndexOfActiveInstance * EcuabFee_Dh_GetAlignedSizeOfInstance()));
 }
 
-EcuabFee_LOCAL FUNC (uint16, EcuabFee_PRIVATE_CODE) EcuabFee_Dh_GetAlignedSizeOfInstance(void){
+EcuabFee_LOCAL FUNC (uint16, ECUABFEE_PRIVATE_CODE) EcuabFee_Dh_GetAlignedSizeOfInstance(void){
   return EcuabFee_Dh_DatasetInfo.AlignedInstanceSize;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_Init(uint16 BlockNumber, uint16 DataLength
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_Init(uint16 BlockNumber, uint16 DataLength
    ,     uint8 NumberOfInstances, EcuabFee_AddressType BlockStartAddress, uint16 AddressAlignment)
 {
   uint16 WriteAlignment = EcuabFee_Ph_GetPartitionWriteAlignment();
@@ -82,20 +82,20 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_Init(uint16 BlockNumber, uint16 Da
   EcuabFee_Dh_DatasetInfo.NumberOfInstances = NumberOfInstances;
 }
 
-FUNC (uint16, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_GetDataLength(void){
+FUNC (uint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_GetDataLength(void){
   return EcuabFee_Dh_DatasetInfo.DataLength;
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_GetFirstInstanceAddress(void){
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_GetFirstInstanceAddress(void){
   return EcuabFee_Dh_DatasetInfo.FirstInstanceAddress;
 }
 
-FUNC (sint16, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_GetLastSectorIndex(void){
+FUNC (sint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_GetLastSectorIndex(void){
 
   return (sint16)((EcuabFee_Dh_DatasetInfo.DatasetSize / EcuabFee_Ph_GetPartitionAddressAlignment()) - 1u);
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_PrepareNextInstance(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_PrepareNextInstance(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
 
   uint8 nextInstanceIndex;
@@ -108,7 +108,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_PrepareNextInstance(EcuabFee_Ih_In
   EcuabFee_Ih_PrepareNextInstanceProperties(Instance, NewStartAddress);
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_EraseSector(uint16 sectorIndex)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_EraseSector(uint16 sectorIndex)
 {
 
   EcuabFee_AddressType sectorAddress = EcuabFee_Dh_DatasetInfo.DatasetStartAddress + (EcuabFee_AddressType) (EcuabFee_Ph_GetPartitionAddressAlignment() * sectorIndex);
@@ -116,7 +116,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_EraseSector(uint16 secto
   return EcuabFee_Fls_Erase(sectorAddress, EcuabFee_Ph_GetPartitionAddressAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_WriteErasePattern(EcuabFee_Dh_ErasePatternType pattern)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_WriteErasePattern(EcuabFee_Dh_ErasePatternType pattern)
 {
 
   uint8 LoopCounter;
@@ -131,7 +131,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_WriteErasePattern(EcuabF
   return EcuabFee_Fls_Write(address, EcuabFee_Dh_TempBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_ReadErasePattern(EcuabFee_Dh_ErasePatternType pattern)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_ReadErasePattern(EcuabFee_Dh_ErasePatternType pattern)
 {
 
   EcuabFee_AddressType address = ((pattern == DATASET_ERASE_PATTERN_1) ? EcuabFee_Dh_DatasetInfo.DatasetStartAddress : EcuabFee_Dh_DatasetInfo.ErasePattern2Address);
@@ -139,7 +139,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_ReadErasePattern(EcuabFe
   return EcuabFee_Fls_Read(address, EcuabFee_Dh_TempBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_BlankCheckErasePattern(EcuabFee_Dh_ErasePatternType pattern)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_BlankCheckErasePattern(EcuabFee_Dh_ErasePatternType pattern)
 {
 
   EcuabFee_AddressType address = ((pattern == DATASET_ERASE_PATTERN_1) ? EcuabFee_Dh_DatasetInfo.DatasetStartAddress : EcuabFee_Dh_DatasetInfo.ErasePattern2Address);
@@ -147,7 +147,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_BlankCheckErasePattern(E
   return EcuabFee_Fls_BlankCheck(address, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_CheckErasePattern(void){
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_CheckErasePattern(void){
 
   Std_ReturnType retVal;
 
@@ -163,7 +163,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_CheckErasePattern(void){
   return retVal;
 }
 
-FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsLastInstance(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_IsLastInstance(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   uint8 IndexOfInstance = EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_Ih_GetInstanceStartAddress(Instance));
@@ -171,7 +171,7 @@ FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsLastInstance(EcuabFee_Ih_Inst
   return ((IndexOfInstance == (EcuabFee_Dh_DatasetInfo.NumberOfInstances - 1u)) ? TRUE : FALSE);
 }
 
-FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsFirstInstanceAndBlank(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_IsFirstInstanceAndBlank(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   uint8 IndexOfInstance = EcuabFee_Dh_CalcIndexOfCurrentInstance(EcuabFee_Ih_GetInstanceStartAddress(Instance));
@@ -181,7 +181,7 @@ FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsFirstInstanceAndBlank(EcuabFe
   return (((IndexOfInstance == 0) && (IsBlank == TRUE)) ? TRUE : FALSE);
 }
 
-FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsErasePatternBlank(void){
+FUNC (boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_IsErasePatternBlank(void){
   boolean retVal = TRUE;
   uint16 LoopCounter;
 
@@ -202,7 +202,7 @@ FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsErasePatternBlank(void){
   return retVal;
 }
 
-FUNC (boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Dh_IsErasePatternValid(void){
+FUNC (boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Dh_IsErasePatternValid(void){
   boolean retVal = TRUE;
   uint16 LoopCounter;
 

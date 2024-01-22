@@ -10,9 +10,9 @@
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_JobEndNotification(void);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_JobEndNotification(void);
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_JobErrorNotification(void);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_JobErrorNotification(void);
 
 #define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"

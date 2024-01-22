@@ -41,7 +41,7 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_WrInst_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_WrInst_ComponentParameter =
+EcuabFee_LOCAL VAR(EcuabFee_WrInst_ComponentParameterType, ECUABFEE_APPL_DATA) EcuabFee_WrInst_ComponentParameter =
   { MEMIF_JOB_FAILED, MEMIF_UNINIT, EcuabFee_WRINST_STATE_UNINIT };
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
@@ -50,11 +50,11 @@ EcuabFee_LOCAL VAR(EcuabFee_WrInst_ComponentParameterType, EcuabFee_APPL_DATA) E
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_Ih_CompareParameterType, EcuabFee_APPL_DATA) EcuabFee_WrInst_CompareParameter;
+EcuabFee_LOCAL VAR(EcuabFee_Ih_CompareParameterType, ECUABFEE_APPL_DATA) EcuabFee_WrInst_CompareParameter;
 
-EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, EcuabFee_APPL_DATA) EcuabFee_WrInst_Instance;
+EcuabFee_LOCAL VAR(EcuabFee_Ih_InstanceType, ECUABFEE_APPL_DATA) EcuabFee_WrInst_Instance;
 
-EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_WrInst_UserJobParameter;
+EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, ECUABFEE_APPL_DATA) EcuabFee_WrInst_UserJobParameter;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -62,35 +62,35 @@ EcuabFee_LOCAL VAR(EcuabFee_UserJobParameterType, EcuabFee_APPL_DATA) EcuabFee_W
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_FinishJob(MemIf_JobResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_PrepareInstanceForWriting(EcuabFee_Ih_InstanceVarPointerType Instance);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_PrepareInstanceForWriting(EcuabFee_Ih_InstanceVarPointerType Instance);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateVerifyState(EcuabFee_WrInst_StateType nextState);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_InitiateVerifyState(EcuabFee_WrInst_StateType nextState);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartManagementPageWrite(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_StartManagementPageWrite(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateNextWriteState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_InitiateNextWriteState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_WriteLastPageOrEndPattern(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_WriteLastPageOrEndPattern(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartEndPatternWrite(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_StartEndPatternWrite(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateIdle(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateIdle(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteStartPattern(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteStartPattern(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteManagementPage(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteManagementPage(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWritePayload(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWritePayload(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteLastPage(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteLastPage(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteEndPattern(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteEndPattern(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_FinishJob(MemIf_JobResultType JobResult)
 {
 
   EcuabFee_Tm_RemoveTask(EcuabFee_WrInst_Execute, EcuabFee_WrInst_Cancel, EcuabFee_WRITE_INSTANCE_LAYER);
@@ -100,7 +100,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_FinishJob(MemIf
   EcuabFee_WrInst_ComponentParameter.StateMachine = EcuabFee_WRINST_STATE_IDLE;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_PrepareInstanceForWriting(EcuabFee_Ih_InstanceVarPointerType Instance)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_PrepareInstanceForWriting(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
 
   if(EcuabFee_WrInst_UserJobParameter.JobType == EcuabFee_WRITE_JOB)
@@ -114,7 +114,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_PrepareInstance
   EcuabFee_Ih_SetManagementValuesAccordingToStatus(Instance);
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateVerifyState(EcuabFee_WrInst_StateType nextState)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_InitiateVerifyState(EcuabFee_WrInst_StateType nextState)
 {
   if(EcuabFee_Ih_VerifyData(EcuabFee_WrInst_CompareParameter) == E_OK)
   {
@@ -125,7 +125,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateVerifyS
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartManagementPageWrite(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_StartManagementPageWrite(void){
   if(EcuabFee_Ih_WriteManagementPage(&EcuabFee_WrInst_Instance, EcuabFee_WrInst_UserJobParameter, &EcuabFee_WrInst_CompareParameter) == E_OK)
   {
     EcuabFee_WrInst_ComponentParameter.StateMachine = EcuabFee_WRINST_STATE_WRITE_MGMT_PAGE;
@@ -135,7 +135,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartManagement
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateNextWriteState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_InitiateNextWriteState(void){
 
   uint16 PageSize = EcuabFee_Ph_GetPartitionWriteAlignment();
   uint16 MgmtSize = (uint16) EcuabFee_MANAGEMENT_SIZE;
@@ -171,7 +171,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_InitiateNextWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_WriteLastPageOrEndPattern(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_WriteLastPageOrEndPattern(void){
 
   if(EcuabFee_Ih_IsLastPageNecessary(&EcuabFee_WrInst_Instance) == TRUE)
   {
@@ -190,7 +190,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_WriteLastPageOr
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartEndPatternWrite(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_StartEndPatternWrite(void){
   if(EcuabFee_Ih_WriteEndPattern(&EcuabFee_WrInst_Instance, &EcuabFee_WrInst_CompareParameter) == E_OK)
   {
     EcuabFee_WrInst_ComponentParameter.StateMachine = EcuabFee_WRINST_STATE_WRITE_END_PATTERN;
@@ -200,7 +200,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_StartEndPattern
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateIdle(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateIdle(void){
 
   EcuabFee_WrInst_PrepareInstanceForWriting(&EcuabFee_WrInst_Instance);
 
@@ -213,7 +213,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateIdl
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteStartPattern(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteStartPattern(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -231,7 +231,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteManagementPage(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteManagementPage(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -249,7 +249,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWritePayload(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWritePayload(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -268,7 +268,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteLastPage(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteLastPage(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -287,7 +287,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteEndPattern(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWriteEndPattern(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -305,7 +305,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateWri
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateMachine(void){
   switch(EcuabFee_WrInst_ComponentParameter.StateMachine)
   {
 
@@ -383,7 +383,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_WrInst_ProcessStateMac
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_Init(void){
   EcuabFee_WrInst_ComponentParameter.Status = MEMIF_IDLE;
   EcuabFee_WrInst_ComponentParameter.JobResult = MEMIF_JOB_OK;
 
@@ -396,15 +396,15 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_Init(void){
   EcuabFee_WrInst_ComponentParameter.StateMachine = EcuabFee_WRINST_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_GetStatus(void){
   return EcuabFee_WrInst_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_GetJobResult(void){
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_GetJobResult(void){
   return EcuabFee_WrInst_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_StartJob(EcuabFee_Ih_InstanceType Instance
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_StartJob(EcuabFee_Ih_InstanceType Instance
    ,     EcuabFee_UserJobParameterType UserJobParameter)
 {
   Std_ReturnType retVal;
@@ -429,7 +429,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_StartJob(EcuabFee_Ih_
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_Execute(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_Execute(void){
 
   if(EcuabFee_WrInst_ComponentParameter.Status == MEMIF_BUSY)
   {
@@ -437,7 +437,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_Execute(void){
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_WrInst_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_WrInst_Cancel(void){
   EcuabFee_WrInst_FinishJob(MEMIF_JOB_CANCELED);
 }
 

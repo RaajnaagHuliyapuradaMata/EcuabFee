@@ -10,14 +10,14 @@
 #define EcuabFee_LOCAL static
 #endif
 
-typedef P2FUNC(void, EcuabFee_PRIVATE_CODE, EcuabFee_Tm_FctPtrType)(void);
+typedef P2FUNC(void, ECUABFEE_PRIVATE_CODE, EcuabFee_Tm_FctPtrType)(void);
 
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, EcuabFee_APPL_DATA) EcuabFee_Tm_ExecuteServiceStack[EcuabFee_NUMBER_OF_LAYERS];
+EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, ECUABFEE_APPL_DATA) EcuabFee_Tm_ExecuteServiceStack[EcuabFee_NUMBER_OF_LAYERS];
 
-EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, EcuabFee_APPL_DATA) EcuabFee_Tm_CancelServiceStack[EcuabFee_NUMBER_OF_LAYERS];
+EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, ECUABFEE_APPL_DATA) EcuabFee_Tm_CancelServiceStack[EcuabFee_NUMBER_OF_LAYERS];
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -25,9 +25,9 @@ EcuabFee_LOCAL VAR(EcuabFee_Tm_FctPtrType, EcuabFee_APPL_DATA) EcuabFee_Tm_Cance
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, EcuabFee_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void);
+EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, ECUABFEE_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void);
 
-EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, EcuabFee_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void){
+EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, ECUABFEE_PRIVATE_CODE) EcuabFee_Tm_GetActiveTask (void){
   sint8 LoopCounter;
   EcuabFee_Tm_FctPtrType returnValue = NULL_PTR;
 
@@ -43,7 +43,7 @@ EcuabFee_LOCAL FUNC (EcuabFee_Tm_FctPtrType, EcuabFee_PRIVATE_CODE) EcuabFee_Tm_
   return returnValue;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_Init(void){
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Tm_Init(void){
   uint8 LoopCounter;
   for(LoopCounter = 0; LoopCounter < EcuabFee_NUMBER_OF_LAYERS; LoopCounter++)
   {
@@ -52,7 +52,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_Init(void){
   }
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_AddTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Tm_AddTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
    ,     EcuabFee_Tm_CancelServicePointerType CancelService, uint8 Layer)
 {
   Std_ReturnType retVal;
@@ -69,7 +69,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_AddTask (EcuabFee_Tm_Exe
   return retVal;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_RemoveTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Tm_RemoveTask (EcuabFee_Tm_ExecuteServicePointerType ExecuteService
    ,     EcuabFee_Tm_CancelServicePointerType CancelService, uint8 Layer)
 {
 
@@ -80,7 +80,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_RemoveTask (EcuabFee_Tm_ExecuteSer
   }
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_ExecuteTask (void){
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Tm_ExecuteTask (void){
 
   EcuabFee_Tm_FctPtrType currentExecuteService = EcuabFee_Tm_GetActiveTask();
 
@@ -90,7 +90,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_ExecuteTask (void){
   }
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Tm_CancelTasks (void){
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Tm_CancelTasks (void){
   sint8 LoopCounter;
 
   for(LoopCounter = (EcuabFee_NUMBER_OF_LAYERS - 1); LoopCounter >= 0; LoopCounter--)

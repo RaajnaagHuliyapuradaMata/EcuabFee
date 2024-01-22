@@ -34,7 +34,7 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_RdMgmt_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_RdMgmt_ComponentParameter =
+EcuabFee_LOCAL VAR(EcuabFee_RdMgmt_ComponentParameterType, ECUABFEE_APPL_DATA) EcuabFee_RdMgmt_ComponentParameter =
   { MEMIF_JOB_FAILED, MEMIF_UNINIT, EcuabFee_RDMGMT_STATE_UNINIT };
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
@@ -43,7 +43,7 @@ EcuabFee_LOCAL VAR(EcuabFee_RdMgmt_ComponentParameterType, EcuabFee_APPL_DATA) E
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL P2VAR(EcuabFee_Ih_InstanceType, AUTOMATIC, EcuabFee_APPL_DATA) EcuabFee_RdMgmt_Instance;
+EcuabFee_LOCAL P2VAR(EcuabFee_Ih_InstanceType, AUTOMATIC, ECUABFEE_APPL_DATA) EcuabFee_RdMgmt_Instance;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -51,23 +51,23 @@ EcuabFee_LOCAL P2VAR(EcuabFee_Ih_InstanceType, AUTOMATIC, EcuabFee_APPL_DATA) Ec
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_FinishJob(MemIf_JobResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessIdleState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessIdleState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForStartBlankCheckState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForStartBlankCheckState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForEndBlankCheckState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForEndBlankCheckState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForLastBlankCheckState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForLastBlankCheckState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadLastPage(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadLastPage(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadAllState(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadAllState(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_FinishJob(MemIf_JobResultType JobResult)
 {
 
   EcuabFee_Tm_RemoveTask(EcuabFee_RdMgmt_Execute, EcuabFee_RdMgmt_Cancel, EcuabFee_READ_MANAGEMENT_BYTES_LAYER);
@@ -77,7 +77,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_FinishJob(MemIf
   EcuabFee_RdMgmt_ComponentParameter.StateMachine = EcuabFee_RDMGMT_STATE_IDLE;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessIdleState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessIdleState(void){
 
   EcuabFee_Ih_SetWP1State(EcuabFee_RdMgmt_Instance, EcuabFee_PATTERN_INIT);
   EcuabFee_Ih_SetWP2State(EcuabFee_RdMgmt_Instance, EcuabFee_PATTERN_INIT);
@@ -106,7 +106,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessIdleStat
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForStartBlankCheckState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForStartBlankCheckState(void){
   if(EcuabFee_Fls_GetJobResult() != MEMIF_JOB_FAILED){
 
    if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
@@ -132,7 +132,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForS
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForEndBlankCheckState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForEndBlankCheckState(void){
   if(EcuabFee_Fls_GetJobResult() != MEMIF_JOB_FAILED){
 
    if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
@@ -157,7 +157,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForE
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForLastBlankCheckState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForLastBlankCheckState(void){
   MemIf_JobResultType currentJobResult = EcuabFee_Fls_GetJobResult();
   boolean IsWp1Inconsistent = (boolean) (EcuabFee_Ih_GetWP1State(EcuabFee_RdMgmt_Instance) == EcuabFee_PATTERN_INCONSISTENT);
   boolean IsWp2Inconsistent = (boolean) (EcuabFee_Ih_GetWP2State(EcuabFee_RdMgmt_Instance) == EcuabFee_PATTERN_INCONSISTENT);
@@ -197,7 +197,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForL
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadLastPage(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadLastPage(void){
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK){
 
     EcuabFee_Ih_SetLastPageState(EcuabFee_RdMgmt_Instance, EcuabFee_Ih_GetPageStatusFromBuffer());
@@ -216,7 +216,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForR
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadAllState(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForReadAllState(void){
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK){
 
     EcuabFee_Ih_SetWP1State(EcuabFee_RdMgmt_Instance, EcuabFee_Ih_GetStartPatternFromBuffer(EcuabFee_RdMgmt_Instance));
@@ -236,7 +236,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessWaitForR
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessStateMachine(void){
   switch(EcuabFee_RdMgmt_ComponentParameter.StateMachine)
   {
 
@@ -276,22 +276,22 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_RdMgmt_ProcessStateMac
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_Init(void){
   EcuabFee_RdMgmt_ComponentParameter.Status = MEMIF_IDLE;
   EcuabFee_RdMgmt_ComponentParameter.JobResult = MEMIF_JOB_OK;
 
   EcuabFee_RdMgmt_ComponentParameter.StateMachine = EcuabFee_RDMGMT_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_GetStatus(void){
   return EcuabFee_RdMgmt_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_GetJobResult(void){
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_GetJobResult(void){
   return EcuabFee_RdMgmt_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_StartJob(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_StartJob(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
   Std_ReturnType retVal;
 
@@ -314,7 +314,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_StartJob(EcuabFee_Ih_
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_Execute(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_Execute(void){
 
   if(EcuabFee_RdMgmt_ComponentParameter.Status == MEMIF_BUSY)
   {
@@ -322,7 +322,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_Execute(void){
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_RdMgmt_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_RdMgmt_Cancel(void){
   EcuabFee_RdMgmt_FinishJob(MEMIF_JOB_CANCELED);
 }
 

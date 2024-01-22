@@ -30,7 +30,7 @@ typedef struct{
 #define EcuabFee_START_SEC_VAR_FAST_INIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_De_ComponentParameterType, EcuabFee_APPL_DATA) EcuabFee_De_ComponentParameter =
+EcuabFee_LOCAL VAR(EcuabFee_De_ComponentParameterType, ECUABFEE_APPL_DATA) EcuabFee_De_ComponentParameter =
   { MEMIF_JOB_FAILED, MEMIF_UNINIT, EcuabFee_DE_STATE_UNINIT };
 
 #define EcuabFee_STOP_SEC_VAR_FAST_INIT_UNSPECIFIED
@@ -39,8 +39,8 @@ EcuabFee_LOCAL VAR(EcuabFee_De_ComponentParameterType, EcuabFee_APPL_DATA) Ecuab
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(EcuabFee_If_ResultType, EcuabFee_APPL_DATA) EcuabFee_De_InstanceFinderResult;
-EcuabFee_LOCAL VAR(sint16, EcuabFee_APPL_DATA) EcuabFee_De_SectorIndex;
+EcuabFee_LOCAL VAR(EcuabFee_If_ResultType, ECUABFEE_APPL_DATA) EcuabFee_De_InstanceFinderResult;
+EcuabFee_LOCAL VAR(sint16, ECUABFEE_APPL_DATA) EcuabFee_De_SectorIndex;
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -48,19 +48,19 @@ EcuabFee_LOCAL VAR(sint16, EcuabFee_APPL_DATA) EcuabFee_De_SectorIndex;
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_FinishJob(MemIf_JobResultType JobResult);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_FinishJob(MemIf_JobResultType JobResult);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_EraseLastSector(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_EraseLastSector(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateIdle(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateIdle(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateWriteErasePattern1(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateWriteErasePattern1(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateEraseSector(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateEraseSector(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateMachine(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateMachine(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_FinishJob(MemIf_JobResultType JobResult)
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_FinishJob(MemIf_JobResultType JobResult)
 {
 
   EcuabFee_Tm_RemoveTask(EcuabFee_De_Execute, EcuabFee_De_Cancel, EcuabFee_DATASET_ERASER_LAYER);
@@ -70,7 +70,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_FinishJob(MemIf_Job
   EcuabFee_De_ComponentParameter.StateMachine = EcuabFee_DE_STATE_IDLE;
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_EraseLastSector(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_EraseLastSector(void){
 
   if(EcuabFee_Dh_EraseSector((uint16) EcuabFee_De_SectorIndex) == E_OK)
   {
@@ -81,7 +81,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_EraseLastSector(voi
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateIdle(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateIdle(void){
 
   if((EcuabFee_De_InstanceFinderResult == INSTANCE_FINDER_OK) ||
       (EcuabFee_De_InstanceFinderResult == INSTANCE_FINDER_EP2_INCORRECT)
@@ -103,7 +103,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateIdle(vo
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateWriteErasePattern1(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateWriteErasePattern1(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -115,7 +115,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateWriteEr
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateEraseSector(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateEraseSector(void){
 
   if(EcuabFee_Fls_GetJobResult() == MEMIF_JOB_OK)
   {
@@ -143,7 +143,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateEraseSe
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateMachine(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_De_ProcessStateMachine(void){
   switch(EcuabFee_De_ComponentParameter.StateMachine)
   {
 
@@ -169,7 +169,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_De_ProcessStateMachine
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_De_Init(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_De_Init(void){
 
   EcuabFee_De_ComponentParameter.Status = MEMIF_IDLE;
   EcuabFee_De_ComponentParameter.JobResult = MEMIF_JOB_OK;
@@ -180,15 +180,15 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_De_Init(void){
   EcuabFee_De_ComponentParameter.StateMachine = EcuabFee_DE_STATE_IDLE;
 }
 
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_De_GetStatus(void){
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_De_GetStatus(void){
   return EcuabFee_De_ComponentParameter.Status;
 }
 
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_De_GetJobResult(void){
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_De_GetJobResult(void){
   return EcuabFee_De_ComponentParameter.JobResult;
 }
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_De_StartJob(EcuabFee_If_ResultType InstanceFinderResult)
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_De_StartJob(EcuabFee_If_ResultType InstanceFinderResult)
 {
   Std_ReturnType retVal;
 
@@ -213,7 +213,7 @@ FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_De_StartJob(EcuabFee_If_Resu
   return retVal;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_De_Execute(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_De_Execute(void){
 
   if(EcuabFee_De_ComponentParameter.Status == MEMIF_BUSY)
   {
@@ -221,7 +221,7 @@ FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_De_Execute(void){
   }
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_De_Cancel(void){
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_De_Cancel(void){
   EcuabFee_De_FinishJob(MEMIF_JOB_CANCELED);
 }
 

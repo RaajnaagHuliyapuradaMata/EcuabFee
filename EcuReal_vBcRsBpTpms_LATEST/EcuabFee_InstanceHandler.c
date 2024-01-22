@@ -15,8 +15,8 @@
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL VAR(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_ReadBuffer[EcuabFee_MAX_READ_SIZE];
-EcuabFee_LOCAL VAR(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_WriteBuffer[EcuabFee_MAX_WRITE_ALIGNMENT];
+EcuabFee_LOCAL VAR(uint8, ECUABFEE_APPL_DATA) EcuabFee_Ih_ReadBuffer[EcuabFee_MAX_READ_SIZE];
+EcuabFee_LOCAL VAR(uint8, ECUABFEE_APPL_DATA) EcuabFee_Ih_WriteBuffer[EcuabFee_MAX_WRITE_ALIGNMENT];
 
 #define EcuabFee_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
@@ -24,8 +24,8 @@ EcuabFee_LOCAL VAR(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_WriteBuffer[EcuabFee_M
 #define EcuabFee_START_SEC_CONST_8BIT
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL CONST(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_ValidManagementValue = 0xF0u;
-EcuabFee_LOCAL CONST(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_InvalidManagementValue = 0x0Fu;
+EcuabFee_LOCAL CONST(uint8, ECUABFEE_APPL_DATA) EcuabFee_Ih_ValidManagementValue = 0xF0u;
+EcuabFee_LOCAL CONST(uint8, ECUABFEE_APPL_DATA) EcuabFee_Ih_InvalidManagementValue = 0x0Fu;
 
 #define EcuabFee_STOP_SEC_CONST_8BIT
 #include "MemMap.hpp"
@@ -33,32 +33,32 @@ EcuabFee_LOCAL CONST(uint8, EcuabFee_APPL_DATA) EcuabFee_Ih_InvalidManagementVal
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_IsValidManagement(uint8 ManagementByte);
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_IsValidManagement(uint8 ManagementByte);
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_IsInvalidManagement(uint8 ManagementByte);
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_IsInvalidManagement(uint8 ManagementByte);
 
 #if(EcuabFee_CORRECT_SINGLE_BIT_FLIPS == STD_ON)
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_HasEvenParity(uint8 ManagementNibble);
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_HasEvenParity(uint8 ManagementNibble);
 #endif
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithStaticPattern(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithStaticPattern(void);
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithErasedValue(void);
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithErasedValue(void);
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_IsValidManagement(uint8 ManagementByte)
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_IsValidManagement(uint8 ManagementByte)
 {
   return (ManagementByte == EcuabFee_Ih_ValidManagementValue) ? TRUE : FALSE;
 }
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_IsInvalidManagement(uint8 ManagementByte)
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_IsInvalidManagement(uint8 ManagementByte)
 {
   return (ManagementByte == EcuabFee_Ih_InvalidManagementValue) ? TRUE : FALSE;
 }
 
 #if(EcuabFee_CORRECT_SINGLE_BIT_FLIPS == STD_ON)
 
-EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_HasEvenParity(uint8 ManagementNibble)
+EcuabFee_LOCAL FUNC(boolean, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_HasEvenParity(uint8 ManagementNibble)
 {
   boolean retVal;
 
@@ -80,7 +80,7 @@ EcuabFee_LOCAL FUNC(boolean, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_HasEvenParity(ui
 }
 #endif
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithStaticPattern(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithStaticPattern(void){
   uint8 LoopCounter;
 
   for(LoopCounter = 0u; LoopCounter < EcuabFee_MAX_WRITE_ALIGNMENT; LoopCounter++)
@@ -89,7 +89,7 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithStati
   }
 }
 
-EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithErasedValue(void){
+EcuabFee_LOCAL FUNC(void, ECUABFEE_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithErasedValue(void){
   uint8 LoopCounter;
 
   for(LoopCounter = 0u; LoopCounter < EcuabFee_MAX_WRITE_ALIGNMENT; LoopCounter++)
@@ -98,13 +98,13 @@ EcuabFee_LOCAL FUNC(void, EcuabFee_PRIVATE_CODE) EcuabFee_Ih_FillBufferWithErase
   }
 }
 
-FUNC(boolean, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_IsLastPageNecessary(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC(boolean, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_IsLastPageNecessary(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   return (boolean) ((EcuabFee_Ih_GetInstanceDataLength(Instance) + EcuabFee_MANAGEMENT_SIZE) % EcuabFee_Ph_GetPartitionWriteAlignment()) != 0;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_CreateInstance(EcuabFee_Ih_InstanceVarPointerType Instance
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_CreateInstance(EcuabFee_Ih_InstanceVarPointerType Instance
    ,     EcuabFee_AddressType InstanceStartAddress, uint16 DataLength)
 {
   Instance->StartAddress = InstanceStartAddress;
@@ -118,7 +118,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_CreateInstance(EcuabFee_Ih_Instanc
   Instance->InstanceStatus = INSTANCE_STATUS_ERASED;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_InitInstance(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_InitInstance(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
   Instance->StartAddress = 0x0000U;
   Instance->WP2Address = 0x0000U;
@@ -130,85 +130,85 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_InitInstance(EcuabFee_Ih_InstanceV
   Instance->InstanceStatus = INSTANCE_STATUS_ERASED;
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetInstanceStartAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetInstanceStartAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->StartAddress;
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetEndPatternAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetEndPatternAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->WP2Address;
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetManagementAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetManagementAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->MgmtAddress;
 }
 
-FUNC (EcuabFee_AddressType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetEndAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_AddressType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetEndAddress(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   return EcuabFee_AlignValue(EcuabFee_Ih_GetManagementAddress(Instance) + EcuabFee_MANAGEMENT_SIZE + EcuabFee_Ih_GetInstanceDataLength(Instance)
    ,     EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (uint16, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetInstanceDataLength(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (uint16, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetInstanceDataLength(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->DataLength;
 }
 
-FUNC (EcuabFee_Ih_InstanceStatusType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetInstanceStatus(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_Ih_InstanceStatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetInstanceStatus(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->InstanceStatus;
 }
 
-FUNC(uint8, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetMgmtValue(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC(uint8, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetMgmtValue(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->MgmtValue;
 }
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetWP1State(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetWP1State(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->WP1State;
 }
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetWP2State(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetWP2State(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->WP2State;
 }
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetLastPageState(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetLastPageState(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return Instance->LastPageState;
 }
 
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_StoreMgmtValueFromBuffer(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_StoreMgmtValueFromBuffer(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
 
   Instance->MgmtValue = EcuabFee_Ih_ReadBuffer[2 * EcuabFee_Ph_GetPartitionWriteAlignment()];
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetInstanceStatus(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_Ih_InstanceStatusType status)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetInstanceStatus(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_Ih_InstanceStatusType status)
 {
   Instance->InstanceStatus = status;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetWP1State(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetWP1State(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
 {
   Instance->WP1State = state;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetWP2State(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetWP2State(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
 {
   Instance->WP2State = state;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetLastPageState(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetLastPageState(EcuabFee_Ih_InstanceVarPointerType Instance, EcuabFee_StaticPatternState state)
 {
   Instance->LastPageState = state;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_PrepareNextInstanceProperties(EcuabFee_Ih_InstanceVarPointerType Instance
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_PrepareNextInstanceProperties(EcuabFee_Ih_InstanceVarPointerType Instance
    ,     EcuabFee_AddressType StartAddress)
 {
 
@@ -223,7 +223,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_PrepareNextInstanceProperties(Ecua
   Instance->InstanceStatus = INSTANCE_STATUS_ERASED;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetManagementValuesAccordingToStatus(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetManagementValuesAccordingToStatus(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
 
   if(EcuabFee_Ih_GetInstanceStatus(Instance) == INSTANCE_STATUS_OK)
@@ -237,7 +237,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetManagementValuesAccordingToStat
   }
 }
 
-FUNC (MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetNegativeJobResultAccordingToStatus(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_SetNegativeJobResultAccordingToStatus(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   MemIf_JobResultType retVal;
 
@@ -255,7 +255,7 @@ FUNC (MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_SetNegativeJobResul
   return retVal;
 }
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_DetermineInstanceStatus(EcuabFee_Ih_InstanceVarPointerType Instance)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_DetermineInstanceStatus(EcuabFee_Ih_InstanceVarPointerType Instance)
 {
   EcuabFee_Ih_InstanceStatusType status;
   uint8 mgmtValue = EcuabFee_Ih_GetMgmtValue(Instance);
@@ -301,7 +301,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_DetermineInstanceStatus(EcuabFee_I
 
 #if(EcuabFee_CORRECT_SINGLE_BIT_FLIPS == STD_ON)
 
-FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_CorrectSingleBitFlips(EcuabFee_Ih_BufferPointerType ManagementByte)
+FUNC (void, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_CorrectSingleBitFlips(EcuabFee_Ih_BufferPointerType ManagementByte)
 {
   uint8 correctNibble;
   uint8 LowerNibble = (*ManagementByte) & 0x0Fu;
@@ -336,7 +336,7 @@ FUNC (void, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_CorrectSingleBitFlips(EcuabFee_Ih_
 }
 #endif
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetStartPatternFromBuffer(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetStartPatternFromBuffer(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   uint16 LoopCounter;
   EcuabFee_StaticPatternState retVal = EcuabFee_PATTERN_INIT;
@@ -383,7 +383,7 @@ FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetStartPat
   return retVal;
 }
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetEndPatternFromBuffer(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetEndPatternFromBuffer(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   uint16 LoopCounter;
   EcuabFee_StaticPatternState retVal = EcuabFee_PATTERN_INIT;
@@ -430,7 +430,7 @@ FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetEndPatte
   return retVal;
 }
 
-FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetPageStatusFromBuffer(void){
+FUNC (EcuabFee_StaticPatternState, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_GetPageStatusFromBuffer(void){
   uint16 LoopCounter;
   EcuabFee_StaticPatternState retVal = EcuabFee_PATTERN_BLANK;
 
@@ -447,36 +447,36 @@ FUNC (EcuabFee_StaticPatternState, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_GetPageStat
   return retVal;
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_BlankCheckStartPattern(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_BlankCheckStartPattern(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return EcuabFee_Fls_BlankCheck(EcuabFee_Ih_GetInstanceStartAddress(Instance), EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_BlankCheckEndPattern(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_BlankCheckEndPattern(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
   return EcuabFee_Fls_BlankCheck(EcuabFee_Ih_GetEndPatternAddress(Instance), EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_BlankCheckLastPage(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_BlankCheckLastPage(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   return EcuabFee_Fls_BlankCheck(EcuabFee_Ih_GetEndAddress(Instance) - EcuabFee_Ph_GetPartitionWriteAlignment(), EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_ReadLastPage(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_ReadLastPage(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   return EcuabFee_Fls_Read(EcuabFee_Ih_GetEndAddress(Instance) - EcuabFee_Ph_GetPartitionWriteAlignment(), EcuabFee_Ih_ReadBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_ReadAllMgmt(EcuabFee_Ih_InstanceConstPointerType Instance)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_ReadAllMgmt(EcuabFee_Ih_InstanceConstPointerType Instance)
 {
 
   uint16 readLength = (uint16) EcuabFee_AlignValue( ((uint32)(2 * EcuabFee_Ph_GetPartitionWriteAlignment()) + EcuabFee_MANAGEMENT_SIZE), EcuabFee_Ph_GetPartitionReadAlignment() );
   return EcuabFee_Fls_Read(EcuabFee_Ih_GetInstanceStartAddress(Instance), EcuabFee_Ih_ReadBuffer, readLength);
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_ReadData(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_ReadData(EcuabFee_Ih_InstanceConstPointerType Instance
    ,     EcuabFee_Ih_BufferPointerType DataBufferPtr
    ,     uint16 BlockOffset
    ,     uint16 ReadLength)
@@ -486,7 +486,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_ReadData(EcuabFee_Ih_Ins
   return EcuabFee_Fls_Read(readAddress, DataBufferPtr, ReadLength);
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteStartPattern(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_WriteStartPattern(EcuabFee_Ih_InstanceConstPointerType Instance
    ,   EcuabFee_Ih_CompareParameterPointerType CompareParameter)
 {
 
@@ -499,7 +499,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteStartPattern(EcuabF
   return EcuabFee_Fls_Write(EcuabFee_Ih_GetInstanceStartAddress(Instance), EcuabFee_Ih_WriteBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteManagementPage(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_WriteManagementPage(EcuabFee_Ih_InstanceConstPointerType Instance
    ,     EcuabFee_UserJobParameterType UserJobParameter, EcuabFee_Ih_CompareParameterPointerType CompareParameter)
 {
   uint16 LoopCounter;
@@ -529,7 +529,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteManagementPage(Ecua
   return EcuabFee_Fls_Write(EcuabFee_Ih_GetManagementAddress(Instance), EcuabFee_Ih_WriteBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WritePayload(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_WritePayload(EcuabFee_Ih_InstanceConstPointerType Instance
    ,     EcuabFee_UserJobParameterType UserJobParameter, EcuabFee_Ih_CompareParameterPointerType CompareParameter)
 {
   uint16 pageSize = EcuabFee_Ph_GetPartitionWriteAlignment();
@@ -547,7 +547,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WritePayload(EcuabFee_Ih
   return EcuabFee_Fls_Write(startAddress, &(UserJobParameter.DataBufferPtr[BufferIndex]), length );
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteLastPage(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_WriteLastPage(EcuabFee_Ih_InstanceConstPointerType Instance
    ,   EcuabFee_UserJobParameterType UserJobParameter, EcuabFee_Ih_CompareParameterPointerType CompareParameter)
 {
   uint16 LoopCounter;
@@ -582,7 +582,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteLastPage(EcuabFee_I
   return EcuabFee_Fls_Write(startAddress, EcuabFee_Ih_WriteBuffer, PageSize);
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteEndPattern(EcuabFee_Ih_InstanceConstPointerType Instance
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_WriteEndPattern(EcuabFee_Ih_InstanceConstPointerType Instance
    ,   EcuabFee_Ih_CompareParameterPointerType CompareParameter)
 {
 
@@ -595,7 +595,7 @@ FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_WriteEndPattern(EcuabFee
   return EcuabFee_Fls_Write(EcuabFee_Ih_GetEndPatternAddress(Instance), EcuabFee_Ih_WriteBuffer, EcuabFee_Ph_GetPartitionWriteAlignment());
 }
 
-FUNC (Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Ih_VerifyData(EcuabFee_Ih_CompareParameterType CompareParameter)
+FUNC (Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Ih_VerifyData(EcuabFee_Ih_CompareParameterType CompareParameter)
 {
   return EcuabFee_Fls_Compare(CompareParameter.EcuabFee_Ih_CompareAddress, CompareParameter.EcuabFee_Ih_CompareBufferPtr
    ,     CompareParameter.EcuabFee_Ih_CompareLength);

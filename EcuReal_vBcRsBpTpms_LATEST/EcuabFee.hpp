@@ -39,7 +39,7 @@
 
 #define EcuabFee_START_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
-typedef P2VAR(uint8, AUTOMATIC, EcuabFee_APPL_DATA) EcuabFee_VarDataPtrType;
+typedef P2VAR(uint8, AUTOMATIC, ECUABFEE_APPL_DATA) EcuabFee_VarDataPtrType;
 
 typedef enum{
   EcuabFee_READ_JOB = 0
@@ -67,28 +67,28 @@ typedef struct{
 
 #define EcuabFee_START_SEC_CODE
 #include "MemMap.hpp"
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Init (void);
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Read (uint16 BlockNumber, uint16 BlockOffset
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Init (void);
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Read (uint16 BlockNumber, uint16 BlockOffset
    ,   EcuabFee_VarDataPtrType DataBufferPtr, uint16 Length);
 
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_Write (uint16 BlockNumber, EcuabFee_VarDataPtrType DataBufferPtr);
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_InvalidateBlock (uint16 BlockNumber);
-FUNC(Std_ReturnType, EcuabFee_PUBLIC_CODE) EcuabFee_EraseImmediateBlock (uint16 BlockNumber);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_Cancel (void);
-FUNC(MemIf_StatusType, EcuabFee_PUBLIC_CODE) EcuabFee_GetStatus (void);
-FUNC(MemIf_JobResultType, EcuabFee_PUBLIC_CODE) EcuabFee_GetJobResult (void);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_GetVersionInfo (P2VAR(Std_VersionInfoType, AUTOMATIC, EcuabFee_APPL_DATA) VersionInfoPtr);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_SetMode (MemIf_ModeType Mode);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_SuspendWrites (void);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_ResumeWrites (void);
-FUNC(void, EcuabFee_PUBLIC_CODE) EcuabFee_MainFunction (void);
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_Write (uint16 BlockNumber, EcuabFee_VarDataPtrType DataBufferPtr);
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_InvalidateBlock (uint16 BlockNumber);
+FUNC(Std_ReturnType, ECUABFEE_PUBLIC_CODE) EcuabFee_EraseImmediateBlock (uint16 BlockNumber);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_Cancel (void);
+FUNC(MemIf_StatusType, ECUABFEE_PUBLIC_CODE) EcuabFee_GetStatus (void);
+FUNC(MemIf_JobResultType, ECUABFEE_PUBLIC_CODE) EcuabFee_GetJobResult (void);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_GetVersionInfo (P2VAR(Std_VersionInfoType, AUTOMATIC, ECUABFEE_APPL_DATA) VersionInfoPtr);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_SetMode (MemIf_ModeType Mode);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_SuspendWrites (void);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_ResumeWrites (void);
+FUNC(void, ECUABFEE_PUBLIC_CODE) EcuabFee_MainFunction (void);
 #define EcuabFee_STOP_SEC_CODE
 #include "MemMap.hpp"
 
 # ifdef EcuabFee_IMPLEMENTATION_SOURCE
 #  define EcuabFee_START_SEC_CODE
 #  include "MemMap.hpp"
-FUNC (uint32, EcuabFee_PUBLIC_CODE) EcuabFee_AlignValue(uint32 Value, uint16 Alignment);
+FUNC (uint32, ECUABFEE_PUBLIC_CODE) EcuabFee_AlignValue(uint32 Value, uint16 Alignment);
 #  define EcuabFee_STOP_SEC_CODE
 #  include "MemMap.hpp"
 # endif
